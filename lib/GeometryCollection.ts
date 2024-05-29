@@ -37,7 +37,7 @@ export class GeometryCollection<T extends Geometry = Geometry>
   }
 
   /**
-   * Create an empty geometry collection
+   * Create a geometry collection
    * @returns geometry collection
    */
   public static create(
@@ -79,7 +79,7 @@ export class GeometryCollection<T extends Geometry = Geometry>
 
   /**
    * Get the list of geometries
-   * @return geometries
+   * @returnsgeometries
    */
   public get geometries(): T[] {
     return this._geometries;
@@ -118,7 +118,7 @@ export class GeometryCollection<T extends Geometry = Geometry>
   /**
    * Get the number of geometries in the collection
    *
-   * @return number of geometries
+   * @returnsnumber of geometries
    */
   public numGeometries(): number {
     return this._geometries.length;
@@ -127,7 +127,7 @@ export class GeometryCollection<T extends Geometry = Geometry>
   /**
    * Returns the Nth geometry
    * @param n nth geometry to return
-   * @return geometry
+   * @returnsgeometry
    */
   public getGeometry(n: number): T {
     return this._geometries[n];
@@ -135,7 +135,7 @@ export class GeometryCollection<T extends Geometry = Geometry>
 
   /**
    * Get the collection type by evaluating the geometries
-   * @return collection geometry type, one of:
+   * @returnscollection geometry type, one of:
    * {@link GeometryType#MULTIPOINT},
    * {@link GeometryType#MULTILINESTRING},
    * {@link GeometryType#MULTIPOLYGON},
@@ -179,7 +179,7 @@ export class GeometryCollection<T extends Geometry = Geometry>
   /**
    * Determine if this geometry collection is a {@link MultiPoint} instance or
    * contains only {@link Point} geometries
-   * @return true if a multi point or contains only points
+   * @returns true if a multi point or contains only points
    */
   public isMultiPoint(): boolean {
     let isMultiPoint = this instanceof MultiPoint;
@@ -193,7 +193,7 @@ export class GeometryCollection<T extends Geometry = Geometry>
    * Get as a {@link MultiPoint}, either the current instance or newly created
    * from the {@link Point} geometries
    *
-   * @return multi point
+   * @returnsmulti point
    */
   public getAsMultiPoint(): MultiPoint {
     let multiPoint: MultiPoint;
@@ -210,7 +210,7 @@ export class GeometryCollection<T extends Geometry = Geometry>
   /**
    * Determine if this geometry collection is a {@link MultiLineString}
    * instance or contains only {@link LineString} geometries
-   * @return true if a multi line string or contains only line strings
+   * @returns true if a multi line string or contains only line strings
    */
   public isMultiLineString(): boolean {
     let isMultiLineString: boolean = this instanceof MultiLineString;
@@ -223,7 +223,7 @@ export class GeometryCollection<T extends Geometry = Geometry>
   /**
    * Get as a {@link MultiLineString}, either the current instance or newly
    * created from the {@link LineString} geometries
-   * @return multi line string
+   * @returnsmulti line string
    */
   public getAsMultiLineString(): MultiLineString {
     let multiLineString: MultiLineString;
@@ -240,7 +240,7 @@ export class GeometryCollection<T extends Geometry = Geometry>
   /**
    * Determine if this geometry collection is a {@link MultiPolygon} instance
    * or contains only {@link Polygon} geometries
-   * @return true if a multi polygon or contains only polygons
+   * @returns true if a multi polygon or contains only polygons
    */
   public isMultiPolygon(): boolean {
     let isMultiPolygon: boolean = this instanceof MultiPolygon;
@@ -254,7 +254,7 @@ export class GeometryCollection<T extends Geometry = Geometry>
    * Get as a {@link MultiPolygon}, either the current instance or newly
    * created from the {@link Polygon} geometries
    *
-   * @return multi polygon
+   * @returnsmulti polygon
    */
   public getAsMultiPolygon(): MultiPolygon {
     let multiPolygon: MultiPolygon;
@@ -271,7 +271,7 @@ export class GeometryCollection<T extends Geometry = Geometry>
   /**
    * Determine if this geometry collection contains only {@link Curve}
    * geometries
-   * @return true if contains only curves
+   * @returns true if contains only curves
    */
   public isMultiCurve(): boolean {
     let isMultiCurve: boolean = this instanceof MultiLineString;
@@ -283,7 +283,7 @@ export class GeometryCollection<T extends Geometry = Geometry>
 
   /**
    * Get as a Multi Curve, a {@link Curve} typed Geometry Collection
-   * @return multi curve
+   * @returnsmulti curve
    */
   public getAsMultiCurve(): GeometryCollection {
     let multiCurve: GeometryCollection;
@@ -302,7 +302,7 @@ export class GeometryCollection<T extends Geometry = Geometry>
    * Determine if this geometry collection contains only {@link Surface}
    * geometries
    *
-   * @return true if contains only surfaces
+   * @returns true if contains only surfaces
    */
   public isMultiSurface(): boolean {
     let isMultiSurface = this instanceof MultiPolygon;
@@ -314,7 +314,7 @@ export class GeometryCollection<T extends Geometry = Geometry>
 
   /**
    * Get as a Multi Surface, a {@link Surface} typed Geometry Collection
-   * @return multi surface
+   * @returnsmulti surface
    */
   public getAsMultiSurface(): GeometryCollection {
     let multiSurface: GeometryCollection;
@@ -333,7 +333,7 @@ export class GeometryCollection<T extends Geometry = Geometry>
 
   /**
    * Get as a top level Geometry Collection
-   * @return geometry collection
+   * @returnsgeometry collection
    */
   public getAsGeometryCollection(): GeometryCollection {
     return GeometryCollection.createFromGeometries(this.geometries);
@@ -343,7 +343,7 @@ export class GeometryCollection<T extends Geometry = Geometry>
    * Determine if the geometries in this collection are made up only of the
    * provided geometry class type
    * @param type geometry class type
-   * @return true if a collection of the type
+   * @returns true if a collection of the type
    */
   private isCollectionOfType(type: any): boolean {
     let isType = true;

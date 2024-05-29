@@ -17,6 +17,12 @@ export class Polygon extends CurvePolygon<LineString> {
     super(geometryType, hasZ, hasM);
   }
 
+  /**
+   * Create a polygon
+   * @param hasZ has z
+   * @param hasM has m
+   * @returns polygon
+   */
   public static create(
     hasZ?: boolean,
     hasM?: boolean,
@@ -24,6 +30,11 @@ export class Polygon extends CurvePolygon<LineString> {
     return new Polygon(GeometryType.Polygon, hasZ, hasM);
   }
 
+  /**
+   * Create a polygon from a line string
+   * @param lineString line string
+   * @returns polygon
+   */
   public static createFromLineString(
     lineString: LineString,
   ): Polygon {
@@ -35,6 +46,11 @@ export class Polygon extends CurvePolygon<LineString> {
     return polygon;
   }
 
+  /**
+   * Create a polygon from line strings
+   * @param lineStrings line strings
+   * @returns polygon
+   */
   public static createFromLineStrings(
     lineStrings: LineString[],
   ): Polygon {

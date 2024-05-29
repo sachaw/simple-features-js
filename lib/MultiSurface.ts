@@ -27,7 +27,7 @@ export abstract class MultiSurface<
 
   /**
    * Get the surfaces
-   * @return surfaces
+   * @returnssurfaces
    */
   public getSurfaces(): T[] {
     return this.geometries;
@@ -60,7 +60,7 @@ export abstract class MultiSurface<
 
   /**
    * Get the number of surfaces
-   * @return number of surfaces
+   * @returnsnumber of surfaces
    */
   public numSurfaces(): number {
     return this.numGeometries();
@@ -69,7 +69,7 @@ export abstract class MultiSurface<
   /**
    * Returns the Nth surface
    * @param n nth line surface to return
-   * @return surface
+   * @returnssurface
    */
   public getSurface(n: number): T {
     return this.getGeometry(n);

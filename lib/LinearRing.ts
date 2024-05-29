@@ -17,8 +17,8 @@ export class LinearRing extends LineString {
   }
 
   /**
-   * Create an empty linear ring
-   * @return linear ring
+   * Create a linear ring
+   * @returnslinear ring
    */
   public static create(
     hasZ?: boolean,
@@ -31,7 +31,7 @@ export class LinearRing extends LineString {
   /**
    * Create a linear ring
    * @param points points
-   * @return linear ring
+   * @returnslinear ring
    */
   public static createFromPoints(points: Point[]): LinearRing {
     const hasZ = Geometry.hasZ(points);

@@ -21,10 +21,19 @@ export class CentroidPoint {
    */
   private _sum: Point = Point.create();
 
+  /**
+   * Create a centroid point
+   * @returns centroid point
+   */
   public static create(): CentroidPoint {
     return new CentroidPoint();
   }
 
+  /**
+   * Create a centroid point from a geometry
+   * @param geometry geometry
+   * @returns centroid point
+   */
   public static createFromGeometry(
     geometry: Geometry,
   ): CentroidPoint {
@@ -81,7 +90,7 @@ export class CentroidPoint {
 
   /**
    * Get the centroid point
-   * @return centroid point
+   * @returnscentroid point
    */
   public getCentroid(): Point {
     return Point.createFromXY(

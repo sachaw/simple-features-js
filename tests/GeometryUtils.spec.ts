@@ -8,6 +8,7 @@ import {
   GeometryConstants,
   GeometryEnvelopeBuilder,
   GeometryType,
+  GeometryTypeUtils,
   GeometryUtils,
   LineString,
   MultiPolygon,
@@ -649,7 +650,7 @@ Deno.test("test point on line", () => {
  * Test the geometry type parent and child hierarchy methods
  */
 Deno.test("test hierarchy", () => {
-  for (const geometryType of GeometryType.values()) {
+  for (const geometryType of GeometryTypeUtils.values()) {
     let parentType = GeometryUtils.parentType(geometryType);
     let parentHierarchy = GeometryUtils.parentHierarchy(geometryType);
     let previousParentType: GeometryType | undefined;

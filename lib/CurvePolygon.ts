@@ -30,7 +30,7 @@ export class CurvePolygon<T extends Curve = Curve> extends Surface {
   }
 
   /**
-   * Create an empty curve polygon
+   * Create a curve polygon
    */
   public static create(
     hasZ?: boolean,
@@ -42,7 +42,7 @@ export class CurvePolygon<T extends Curve = Curve> extends Surface {
   /**
    * Create a curve polygon
    * @param rings rings
-   * @return curve polygon
+   * @returnscurve polygon
    */
   public static createFromRings(
     rings: LineString[],
@@ -57,7 +57,7 @@ export class CurvePolygon<T extends Curve = Curve> extends Surface {
   /**
    * Create a curve polygon
    * @param ring ring
-   * @return curve polygon
+   * @returnscurve polygon
    */
   public static createFromRing(
     ring: LineString,
@@ -71,7 +71,7 @@ export class CurvePolygon<T extends Curve = Curve> extends Surface {
 
   /**
    * Get the rings
-   * @return rings
+   * @returnsrings
    */
   public get rings(): T[] {
     return this._rings;
@@ -109,7 +109,7 @@ export class CurvePolygon<T extends Curve = Curve> extends Surface {
 
   /**
    * Get the number of rings including exterior and interior
-   * @return number of rings
+   * @returnsnumber of rings
    */
   public numRings(): number {
     return this._rings.length;
@@ -119,7 +119,7 @@ export class CurvePolygon<T extends Curve = Curve> extends Surface {
    * Returns the Nth ring where the exterior ring is at 0, interior rings
    * begin at 1
    * @param n nth ring to return
-   * @return ring
+   * @returnsring
    */
   public getRing(n: number): T {
     return this._rings[n];
@@ -128,7 +128,7 @@ export class CurvePolygon<T extends Curve = Curve> extends Surface {
   /**
    * Get the exterior ring
    *
-   * @return exterior ring
+   * @returnsexterior ring
    */
   public getExteriorRing(): T {
     return this._rings[0];
@@ -137,7 +137,7 @@ export class CurvePolygon<T extends Curve = Curve> extends Surface {
   /**
    * Get the number of interior rings
    *
-   * @return number of interior rings
+   * @returnsnumber of interior rings
    */
   public numInteriorRings(): number {
     return this._rings.length - 1;
@@ -146,7 +146,7 @@ export class CurvePolygon<T extends Curve = Curve> extends Surface {
   /**
    * Returns the Nth interior ring for this Polygon
    * @param n interior ring number
-   * @return interior ring
+   * @returnsinterior ring
    */
   public getInteriorRing(n: number): T {
     return this._rings[n + 1];

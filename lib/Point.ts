@@ -38,6 +38,12 @@ export class Point extends Geometry {
     this._y = 0;
   }
 
+  /**
+   * Create a point
+   * @param hasZ has z
+   * @param hasM has m
+   * @returns point
+   */
   public static create(
     hasZ?: boolean,
     hasM?: boolean,
@@ -45,6 +51,12 @@ export class Point extends Geometry {
     return new Point(GeometryType.Point, hasZ, hasM);
   }
 
+  /**
+   * Create a point
+   * @param x x
+   * @param y y
+   * @returns point
+   */
   public static createFromXY(x: number, y: number): Point {
     const point = Point.create();
     point.x = x;
@@ -52,6 +64,13 @@ export class Point extends Geometry {
     return point;
   }
 
+  /**
+   * Create a point
+   * @param x x
+   * @param y y
+   * @param z z
+   * @returns point
+   */
   public static createFromXYZ(x: number, y: number, z: number): Point {
     const point = Point.create(true);
     point.x = x;
@@ -60,6 +79,13 @@ export class Point extends Geometry {
     return point;
   }
 
+  /**
+   * Create a point
+   * @param x x
+   * @param y y
+   * @param m m
+   * @returns point
+   */
   public static createFromXYZM(
     x: number,
     y: number,
@@ -76,7 +102,7 @@ export class Point extends Geometry {
 
   /**
    * Get x
-   * @return x
+   * @returnsx
    */
   public get x(): number {
     return this._x;
@@ -92,7 +118,7 @@ export class Point extends Geometry {
 
   /**
    * Get y
-   * @return y
+   * @returnsy
    */
   public get y(): number {
     return this._y;
@@ -108,7 +134,7 @@ export class Point extends Geometry {
 
   /**
    * Get z
-   * @return z
+   * @returnsz
    */
   public get z(): number | undefined {
     return this._z;
@@ -126,7 +152,7 @@ export class Point extends Geometry {
   /**
    * Get m
    *
-   * @return m
+   * @returnsm
    */
   public get m(): number | undefined {
     return this._m;

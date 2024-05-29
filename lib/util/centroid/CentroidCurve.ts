@@ -28,10 +28,19 @@ export class CentroidCurve {
    */
   private _totalLength = 0;
 
+  /**
+   * Create a centroid curve
+   * @returns centroid curve
+   */
   public static create(): CentroidCurve {
     return new CentroidCurve();
   }
 
+  /**
+   * Create a centroid curve from a geometry
+   * @param geometry geometry
+   * @returns centroid curve
+   */
   public static createFromGeometry(
     geometry: Geometry,
   ): CentroidCurve {
@@ -121,7 +130,7 @@ export class CentroidCurve {
 
   /**
    * Get the centroid point
-   * @return centroid point
+   * @returnscentroid point
    */
   public getCentroid(): Point {
     return Point.createFromXY(

@@ -25,7 +25,7 @@ export class GeometryEnvelopeBuilder {
   /**
    * Build Geometry Envelope
    * @param geometry geometry to build envelope from
-   * @return geometry envelope
+   * @returnsgeometry envelope
    */
   public static buildEnvelope(
     geometry: Geometry,

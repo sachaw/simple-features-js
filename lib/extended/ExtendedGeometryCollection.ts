@@ -25,6 +25,12 @@ export class ExtendedGeometryCollection<T extends Geometry = Geometry>
     super(geometryType, hasZ, hasM);
   }
 
+  /**
+   * Create an extended geometry collection
+   * @param hasZ has z
+   * @param hasM has m
+   * @returns extended geometry collection
+   */
   public static create(
     hasZ?: boolean,
     hasM?: boolean,
@@ -36,6 +42,11 @@ export class ExtendedGeometryCollection<T extends Geometry = Geometry>
     );
   }
 
+  /**
+   * Create an extended geometry collection
+   * @param geometryCollection geometry collection
+   * @returns extended geometry collection
+   */
   public static createFromGeometryCollection(
     geometryCollection: GeometryCollection,
   ): ExtendedGeometryCollection {

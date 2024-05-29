@@ -56,7 +56,7 @@ export class Segment {
   /**
    * Get the edge number
    *
-   * @return edge number
+   * @returnsedge number
    */
   public get edge(): number {
     return this._edge;
@@ -65,7 +65,7 @@ export class Segment {
   /**
    * Get the polygon ring number
    *
-   * @return polygon ring number
+   * @returnspolygon ring number
    */
   public get ring(): number {
     return this._ring;
@@ -74,7 +74,7 @@ export class Segment {
   /**
    * Get the left point
    *
-   * @return left point
+   * @returnsleft point
    */
   public get leftPoint(): Point {
     return this._leftPoint;
@@ -83,7 +83,7 @@ export class Segment {
   /**
    * Get the right point
    *
-   * @return right point
+   * @returnsright point
    */
   public get rightPoint(): Point {
     return this._rightPoint;
@@ -92,7 +92,7 @@ export class Segment {
   /**
    * Get the segment above
    *
-   * @return segment above
+   * @returnssegment above
    */
   public get above(): Segment | undefined {
     return this._above;
@@ -110,7 +110,7 @@ export class Segment {
   /**
    * Get the segment below
    *
-   * @return segment below
+   * @returnssegment below
    */
   public get below(): Segment | undefined {
     return this._below;

@@ -28,7 +28,7 @@ export class ShamosHoey {
   /**
    * Determine if the polygon is simple
    * @param polygon polygon
-   * @return true if simple, false if intersects
+   * @returns true if simple, false if intersects
    */
   public static simplePolygon(polygon: Polygon): boolean {
     return ShamosHoey.simplePolygonLineStrings(polygon.rings);
@@ -37,7 +37,7 @@ export class ShamosHoey {
   /**
    * Determine if the polygon points are simple
    * @param points polygon as points
-   * @return true if simple, false if intersects
+   * @returns true if simple, false if intersects
    */
   public static simplePolygonPoints(points: Point[]): boolean {
     return ShamosHoey.simplePolygonLineString(
@@ -48,7 +48,7 @@ export class ShamosHoey {
   /**
    * Determine if the polygon point rings are simple
    * @param pointRings polygon point rings
-   * @return true if simple, false if intersects
+   * @returns true if simple, false if intersects
    */
   public static simplePolygonRingPoints(pointRings: Point[][]): boolean {
     const rings: LineString[] = pointRings.map(
@@ -60,7 +60,7 @@ export class ShamosHoey {
   /**
    * Determine if the polygon line string ring is simple
    * @param ring polygon ring as a line string
-   * @return true if simple, false if intersects
+   * @returns true if simple, false if intersects
    */
   public static simplePolygonLineString(ring: LineString): boolean {
     return ShamosHoey.simplePolygonLineStrings([ring]);
@@ -69,7 +69,7 @@ export class ShamosHoey {
   /**
    * Determine if the polygon rings are simple
    * @param rings polygon rings
-   * @return true if simple, false if intersects
+   * @returns true if simple, false if intersects
    */
   public static simplePolygonLineStrings(rings: LineString[]): boolean {
     let simple = rings.length !== 0;

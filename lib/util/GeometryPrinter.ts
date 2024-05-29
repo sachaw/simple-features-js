@@ -1,7 +1,6 @@
 import type {
   CircularString,
   CompoundCurve,
-  Curve,
   CurvePolygon,
   Geometry,
   GeometryCollection,
@@ -15,7 +14,7 @@ import type {
   TIN,
   Triangle,
 } from "../internal.ts";
-import { GeometryType } from "../internal.ts";
+import { GeometryType, GeometryTypeUtils } from "../internal.ts";
 
 /**
  * String representation of a Geometry
@@ -24,7 +23,7 @@ export class GeometryPrinter {
   /**
    * Get Geometry Information as a String
    * @param geometry geometry
-   * @return geometry String
+   * @returnsgeometry String
    */
   public static getGeometryString(
     geometry: Geometry,
@@ -109,7 +108,9 @@ export class GeometryPrinter {
           message.push("\n\n");
           message.push(`Geometry ${i + 1}`);
           message.push("\n");
-          message.push(GeometryType.nameFromType(subGeometry.geometryType));
+          message.push(
+            GeometryTypeUtils.nameFromType(subGeometry.geometryType),
+          );
           message.push("\n");
           message.push(GeometryPrinter.getGeometryString(subGeometry));
         }

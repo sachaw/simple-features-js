@@ -47,7 +47,7 @@ export class Event implements Comparable<Event> {
   /**
    * Get the edge
    *
-   * @return edge number
+   * @returnsedge number
    */
   public get edge(): number {
     return this._edge;
@@ -55,7 +55,7 @@ export class Event implements Comparable<Event> {
 
   /**
    * Get the polygon ring number
-   * @return polygon ring number
+   * @returnspolygon ring number
    */
   public get ring(): number {
     return this._ring;
@@ -63,7 +63,7 @@ export class Event implements Comparable<Event> {
 
   /**
    * Get the polygon point
-   * @return polygon point
+   * @returnspolygon point
    */
   public get point(): Point {
     return this._point;
@@ -71,7 +71,7 @@ export class Event implements Comparable<Event> {
 
   /**
    * Get the event type
-   * @return event type
+   * @returnsevent type
    */
   public get type(): EventType {
     return this._type;

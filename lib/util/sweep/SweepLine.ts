@@ -95,7 +95,7 @@ export class SweepLine {
   /**
    * Add the event to the sweep line
    * @param event event
-   * @return added segment
+   * @returnsadded segment
    */
   public add(event: Event): Segment {
     const segment: Segment = this.createSegment(event);
@@ -138,7 +138,7 @@ export class SweepLine {
   /**
    * Create a segment from the event
    * @param event event
-   * @return segment
+   * @returnssegment
    */
   private createSegment(event: Event): Segment {
     const edgeNumber = event.edge;
@@ -167,7 +167,7 @@ export class SweepLine {
    * Find the existing event segment
    *
    * @param event event
-   * @return segment
+   * @returnssegment
    */
   public find(event: Event): Segment {
     const segment = this._segments.get(event.ring)?.get(event.edge);
@@ -183,7 +183,7 @@ export class SweepLine {
    *
    * @param segment1 segment 1
    * @param segment2 segment 2
-   * @return true if intersection, false if not
+   * @returns true if intersection, false if not
    */
   public intersect(
     segment1: Segment | undefined,
@@ -251,7 +251,7 @@ export class SweepLine {
    *
    * @param segment segment
    * @param x current point x value
-   * @return segment y value
+   * @returnssegment y value
    */
   public static yValueAtX(segment: Segment, x: number): number {
     const left: Point = segment.leftPoint;
@@ -267,7 +267,7 @@ export class SweepLine {
    * XY order of two points
    * @param point1 point 1
    * @param point2 point 2
-   * @return +1 if p1 &gt; p2, -1 if p1 &lt; p2, 0 if equal
+   * @returns+1 if p1 &gt; p2, -1 if p1 &lt; p2, 0 if equal
    */
   public static xyOrder(point1: Point, point2: Point): number {
     let value = 0;
@@ -288,7 +288,7 @@ export class SweepLine {
    *
    * @param segment segment
    * @param point point
-   * @return > 0 if left, 0 if on, < 0 if right
+   * @returns> 0 if left, 0 if on, < 0 if right
    */
   private static isLeft(segment: Segment, point: Point): number {
     return SweepLine.isLeftPoints(segment.leftPoint, segment.rightPoint, point);
@@ -300,7 +300,7 @@ export class SweepLine {
    * @param point0 point 0
    * @param point1 point 1
    * @param point2 point 2
-   * @return > 0 if left, 0 if on, < 0 if right
+   * @returns> 0 if left, 0 if on, < 0 if right
    */
   private static isLeftPoints(
     point0: Point,

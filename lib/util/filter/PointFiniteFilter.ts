@@ -38,7 +38,7 @@ export class PointFiniteFilter implements GeometryFilter {
   /**
    * Get the finite filter type
    *
-   * @return finite filter type
+   * @returnsfinite filter type
    */
   public getType(): FiniteFilterType {
     return this._type;
@@ -57,7 +57,7 @@ export class PointFiniteFilter implements GeometryFilter {
   /**
    * Is filtering for z values enabled?
    *
-   * @return true if z filtering
+   * @returns true if z filtering
    */
   public isFilterZ(): boolean {
     return this._filterZ;
@@ -75,7 +75,7 @@ export class PointFiniteFilter implements GeometryFilter {
   /**
    * Is filtering for m values enabled?
    *
-   * @return true if m filtering
+   * @returns true if m filtering
    */
   public isFilterM(): boolean {
     return this._filterM;
@@ -105,7 +105,7 @@ export class PointFiniteFilter implements GeometryFilter {
    * Filter the point
    *
    * @param point point
-   * @return true if passes filter and point should be included
+   * @returns true if passes filter and point should be included
    */
   private filterPoint(point: Point): boolean {
     return (
@@ -146,7 +146,7 @@ export class PointFiniteFilter implements GeometryFilter {
    * Filter the Z value
    *
    * @param point point
-   * @return true if passes
+   * @returns true if passes
    */
   private filterZ(point: Point): boolean {
     if (point.z === undefined) {
@@ -159,7 +159,7 @@ export class PointFiniteFilter implements GeometryFilter {
    * Filter the M value
    *
    * @param point point
-   * @return true if passes
+   * @returns true if passes
    */
   private filterM(point: Point): boolean {
     if (point.m === undefined) {

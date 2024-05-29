@@ -17,6 +17,12 @@ export class MultiPolygon extends MultiSurface<Polygon> {
     super(geometryType, hasZ, hasM);
   }
 
+  /**
+   * Create a multi polygon
+   * @param hasZ has z
+   * @param hasM has m
+   * @returns multi polygon
+   */
   public static create(
     hasZ?: boolean,
     hasM?: boolean,
@@ -24,6 +30,11 @@ export class MultiPolygon extends MultiSurface<Polygon> {
     return new MultiPolygon(GeometryType.MultiPolygon, hasZ, hasM);
   }
 
+  /**
+   * Create a multi polygon from polygons
+   * @param polygons polygons
+   * @returns multi polygon
+   */
   public static createFromPolygons(
     polygons: Polygon[],
   ): MultiPolygon {
@@ -36,7 +47,7 @@ export class MultiPolygon extends MultiSurface<Polygon> {
 
   /**
    * Get the polygons
-   * @return polygons
+   * @returnspolygons
    */
   public get polygons(): Polygon[] {
     return this.getSurfaces();
@@ -68,7 +79,7 @@ export class MultiPolygon extends MultiSurface<Polygon> {
 
   /**
    * Get the number of polygons
-   * @return number of polygons
+   * @returnsnumber of polygons
    */
   public numPolygons(): number {
     return this.numSurfaces();
@@ -77,7 +88,7 @@ export class MultiPolygon extends MultiSurface<Polygon> {
   /**
    * Returns the Nth polygon
    * @param n  nth polygon to return
-   * @return polygon
+   * @returnspolygon
    */
   public getPolygon(n: number): Polygon {
     return this.getSurface(n);

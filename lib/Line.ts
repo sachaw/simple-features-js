@@ -16,6 +16,12 @@ export class Line extends LineString {
     super(geometryType, hasZ, hasM);
   }
 
+  /**
+   * Create a line
+   * @param hasZ has z
+   * @param hasM has m
+   * @returns line
+   */
   public static create(
     hasZ?: boolean,
     hasM?: boolean,
@@ -24,6 +30,11 @@ export class Line extends LineString {
     return new Line(GeometryType.LineString, hasZ, hasM);
   }
 
+  /**
+   * Create a line from points
+   * @param points points
+   * @returns line
+   */
   public static createFromPoints(points: Point[]): Line {
     const hasZ = Geometry.hasZ(points);
     const hasM = Geometry.hasM(points);
@@ -34,6 +45,12 @@ export class Line extends LineString {
     return line;
   }
 
+  /**
+   * Create a line from two points
+   * @param point1 point 1
+   * @param point2 point 2
+   * @returns line
+   */
   public static createFromTwoPoints(point1: Point, point2: Point): Line {
     const hasZ = point1.hasZ || point2.hasZ;
     const hasM = point1.hasM || point2.hasM;

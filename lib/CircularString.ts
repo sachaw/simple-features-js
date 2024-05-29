@@ -17,7 +17,7 @@ export class CircularString extends LineString {
   }
 
   /**
-   * Create an empty circular string
+   * Create a circular string
    * @returns circular string
    */
   public static create(

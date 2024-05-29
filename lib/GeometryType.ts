@@ -109,8 +109,16 @@ export enum GeometryType {
   Triangle = 17,
 }
 
-export namespace GeometryType {
-  export function nameFromType(geometryType: GeometryType): string {
+/**
+ * Geometry Type utilities
+ */
+export class GeometryTypeUtils {
+  /**
+   * Get the name of the geometry type
+   * @param geometryType geometry type
+   * @returns name
+   */
+  static nameFromType(geometryType: GeometryType): string {
     let name: string | undefined;
     if (geometryType !== null && geometryType !== undefined) {
       name = GeometryType[geometryType];
@@ -123,11 +131,12 @@ export namespace GeometryType {
     return name;
   }
 
-  export function fromName(type: string): GeometryType {
-    return GeometryType[type as keyof typeof GeometryType] as GeometryType;
-  }
-
-  export function values(): GeometryType[] {
+  /**
+   * Get the geometry type from the name
+   * @param name name
+   * @returns geometry type
+   */
+  static values(): GeometryType[] {
     return [
       GeometryType.Geometry,
       GeometryType.Point,

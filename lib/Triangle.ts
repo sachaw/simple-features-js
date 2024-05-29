@@ -16,6 +16,9 @@ export class Triangle extends Polygon {
     super(geometryType, hasZ, hasM);
   }
 
+  /**
+   * Create a triangle
+   */
   public static create(
     hasZ?: boolean,
     hasM?: boolean,
@@ -23,12 +26,22 @@ export class Triangle extends Polygon {
     return new Triangle(GeometryType.Triangle, hasZ, hasM);
   }
 
+  /**
+   * Create a triangle
+   * @param lineString line string
+   * @returns triangle
+   */
   public static createFromLineString(lineString: LineString): Triangle {
     const triangle = Triangle.create(false, false);
     triangle.addRing(lineString);
     return triangle;
   }
 
+  /**
+   * Create a triangle
+   * @param lineStrings line strings
+   * @returns triangle
+   */
   public static createFromLineStrings(lineStrings: LineString[]): Triangle {
     const triangle = Triangle.create(false, false);
     triangle.rings = lineStrings;

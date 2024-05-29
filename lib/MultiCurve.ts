@@ -24,7 +24,7 @@ export abstract class MultiCurve<T extends Curve>
 
   /**
    * Get the curves
-   * @return curves
+   * @returnscurves
    */
   public getCurves(): T[] {
     return this.geometries;
@@ -56,7 +56,7 @@ export abstract class MultiCurve<T extends Curve>
 
   /**
    * Get the number of curves
-   * @return number of curves
+   * @returnsnumber of curves
    */
   public numCurves(): number {
     return this.numGeometries();
@@ -65,7 +65,7 @@ export abstract class MultiCurve<T extends Curve>
   /**
    * Returns the Nth curve
    * @param n nth line curve to return
-   * @return curve
+   * @returnscurve
    */
   public getCurve(n: number): T {
     return this.getGeometry(n);
@@ -75,7 +75,7 @@ export abstract class MultiCurve<T extends Curve>
    * Determine if this Multi Curve is closed for each Curve (start point = end
    * point)
    *
-   * @return true if closed
+   * @returns true if closed
    */
   public isClosed(): boolean {
     let closed = true;

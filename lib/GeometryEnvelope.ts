@@ -55,7 +55,7 @@ export class GeometryEnvelope {
   private _maxM: number | undefined;
 
   /**
-   * Create an empty geometry envelope
+   * Create a geometry envelope
    * @returns geometry envelope
    */
   public static create(
@@ -155,7 +155,7 @@ export class GeometryEnvelope {
   /**
    * True if has Z coordinates
    *
-   * @return has z
+   * @returnshas z
    * @see #hasZ()
    */
   public is3D(): boolean {
@@ -163,7 +163,7 @@ export class GeometryEnvelope {
   }
   /**
    * True if has M measurements
-   * @return has m
+   * @returnshas m
    * @see #hasM()
    */
   public isMeasured(): boolean {
@@ -172,7 +172,7 @@ export class GeometryEnvelope {
 
   /**
    * Get min x
-   * @return min x
+   * @returnsmin x
    */
   public get minX(): number {
     if (this._minX === undefined) {
@@ -191,7 +191,7 @@ export class GeometryEnvelope {
 
   /**
    * Get max x
-   * @return max x
+   * @returnsmax x
    */
   public get maxX(): number {
     if (this._maxX === undefined) {
@@ -210,7 +210,7 @@ export class GeometryEnvelope {
 
   /**
    * Get min y
-   * @return min y
+   * @returnsmin y
    */
   public get minY(): number {
     if (this._minY === undefined) {
@@ -229,7 +229,7 @@ export class GeometryEnvelope {
 
   /**
    * Get max y
-   * @return max y
+   * @returnsmax y
    */
   public get maxY(): number {
     if (this._maxY === undefined) {
@@ -248,7 +248,7 @@ export class GeometryEnvelope {
 
   /**
    * True if has Z coordinates
-   * @return has z
+   * @returnshas z
    */
   public get hasZ(): boolean {
     return this._hasZ;
@@ -264,7 +264,7 @@ export class GeometryEnvelope {
 
   /**
    * Get min z
-   * @return min z
+   * @returnsmin z
    */
   public get minZ(): number | undefined {
     return this._minZ;
@@ -280,7 +280,7 @@ export class GeometryEnvelope {
 
   /**
    * Get max z
-   * @return max z
+   * @returnsmax z
    */
   public get maxZ(): number | undefined {
     return this._maxZ;
@@ -296,7 +296,7 @@ export class GeometryEnvelope {
 
   /**
    * Has m coordinates
-   * @return true if has m coordinates
+   * @returns true if has m coordinates
    */
   public get hasM(): boolean {
     return this._hasM;
@@ -312,7 +312,7 @@ export class GeometryEnvelope {
 
   /**
    * Get min m
-   * @return min m
+   * @returnsmin m
    */
   public get minM(): number | undefined {
     return this._minM;
@@ -328,7 +328,7 @@ export class GeometryEnvelope {
 
   /**
    * Get max m
-   * @return max m
+   * @returnsmax m
    */
   public get maxM(): number | undefined {
     return this._maxM;
@@ -344,7 +344,7 @@ export class GeometryEnvelope {
 
   /**
    * Get the x range
-   * @return x range
+   * @returnsx range
    */
   public get xRange(): number {
     if (this._minX === undefined || this._maxX === undefined) {
@@ -355,7 +355,7 @@ export class GeometryEnvelope {
 
   /**
    * Get the y range
-   * @return y range
+   * @returnsy range
    */
   public get yRange(): number {
     if (this._minY === undefined || this._maxY === undefined) {
@@ -366,7 +366,7 @@ export class GeometryEnvelope {
 
   /**
    * Get the z range
-   * @return z range
+   * @returnsz range
    */
   public get zRange(): number {
     const range = this._minZ !== undefined && this._maxZ !== undefined
@@ -380,7 +380,7 @@ export class GeometryEnvelope {
 
   /**
    * Get the m range
-   * @return m range
+   * @returnsm range
    */
   public get mRange(): number {
     const range = this._minM !== undefined && this._maxM !== undefined
@@ -394,7 +394,7 @@ export class GeometryEnvelope {
 
   /**
    * Determine if the envelope is of a single point
-   * @return true if a single point bounds
+   * @returns true if a single point bounds
    * @since 2.0.5
    */
   public isPoint(): boolean {
@@ -404,7 +404,7 @@ export class GeometryEnvelope {
   /**
    * Get the top left point
    *
-   * @return top left point
+   * @returnstop left point
    * @since 1.1.1
    */
   public getTopLeft(): Point {
@@ -414,7 +414,7 @@ export class GeometryEnvelope {
   /**
    * Get the bottom left point
    *
-   * @return bottom left point
+   * @returnsbottom left point
    * @since 1.1.1
    */
   public getBottomLeft(): Point {
@@ -424,7 +424,7 @@ export class GeometryEnvelope {
   /**
    * Get the bottom right point
    *
-   * @return bottom right point
+   * @returnsbottom right point
    * @since 1.1.1
    */
   public getBottomRight(): Point {
@@ -434,7 +434,7 @@ export class GeometryEnvelope {
   /**
    * Get the top right point
    *
-   * @return top right point
+   * @returnstop right point
    * @since 1.1.1
    */
   public getTopRight(): Point {
@@ -444,7 +444,7 @@ export class GeometryEnvelope {
   /**
    * Get the left line
    *
-   * @return left line
+   * @returnsleft line
    * @since 1.1.1
    */
   public getLeft(): Line {
@@ -454,7 +454,7 @@ export class GeometryEnvelope {
   /**
    * Get the bottom line
    *
-   * @return bottom line
+   * @returnsbottom line
    * @since 1.1.1
    */
   public getBottom(): Line {
@@ -467,7 +467,7 @@ export class GeometryEnvelope {
   /**
    * Get the right line
    *
-   * @return right line
+   * @returnsright line
    * @since 1.1.1
    */
   public getRight(): Line {
@@ -477,7 +477,7 @@ export class GeometryEnvelope {
   /**
    * Get the top line
    *
-   * @return top line
+   * @returnstop line
    * @since 1.1.1
    */
   public getTop(): Line {
@@ -487,7 +487,7 @@ export class GeometryEnvelope {
   /**
    * Get the envelope mid x
    *
-   * @return mid x
+   * @returnsmid x
    * @since 1.0.3
    */
   public getMidX(): number {
@@ -497,7 +497,7 @@ export class GeometryEnvelope {
   /**
    * Get the envelope mid y
    *
-   * @return mid y
+   * @returnsmid y
    * @since 1.0.3
    */
   public getMidY(): number {
@@ -506,7 +506,7 @@ export class GeometryEnvelope {
 
   /**
    * Get the envelope centroid point
-   * @return centroid point
+   * @returnscentroid point
    */
   public get centroid(): Point {
     if (
@@ -526,7 +526,7 @@ export class GeometryEnvelope {
   /**
    * Determine if the envelope is empty
    *
-   * @return true if empty
+   * @returns true if empty
    * @since 1.1.1
    */
   public isEmpty(): boolean {
@@ -537,7 +537,7 @@ export class GeometryEnvelope {
    * Determine if intersects with the provided envelope
    * @param envelope geometry envelope
    * @param allowEmpty allow empty ranges when determining intersection
-   * @return true if intersects
+   * @returns true if intersects
    */
   public intersects(
     envelope: GeometryEnvelope,
@@ -550,7 +550,7 @@ export class GeometryEnvelope {
    * Get the overlapping geometry envelope with the provided envelope
    * @param envelope geometry envelope
    * @param allowEmpty allow empty ranges when determining intersection
-   * @return geometry envelope
+   * @returnsgeometry envelope
    */
   public overlap(
     envelope: GeometryEnvelope,
@@ -574,7 +574,7 @@ export class GeometryEnvelope {
   /**
    * Get the union geometry envelope combined with the provided envelope
    * @param envelope geometry envelope
-   * @return geometry envelope
+   * @returnsgeometry envelope
    */
   public union(envelope: GeometryEnvelope): GeometryEnvelope {
     const minX = Math.min(this.minX, envelope.minX);
@@ -593,7 +593,7 @@ export class GeometryEnvelope {
    * Determine if contains the point
    *
    * @param point point
-   * @return true if contains
+   * @returns true if contains
    * @since 1.1.1
    */
   public containsPoint(point: Point): boolean {
@@ -605,7 +605,7 @@ export class GeometryEnvelope {
    *
    * @param point point
    * @param epsilon epsilon equality tolerance
-   * @return true if contains
+   * @returns true if contains
    * @since 1.1.1
    */
   public containsPointWithEpsilon(point: Point, epsilon: number): boolean {
@@ -617,7 +617,7 @@ export class GeometryEnvelope {
    *
    * @param x x value
    * @param y y value
-   * @return true if contains
+   * @returns true if contains
    * @since 1.1.1
    */
   public containsCoords(x: number, y: number): boolean {
@@ -630,7 +630,7 @@ export class GeometryEnvelope {
    * @param x x value
    * @param y y value
    * @param epsilon epsilon equality tolerance
-   * @return true if contains
+   * @returns true if contains
    * @since 1.1.1
    */
   public containsCoordsWithEpsilon(
@@ -649,7 +649,7 @@ export class GeometryEnvelope {
   /**
    * Determine if inclusively contains the provided envelope
    * @param envelope geometry envelope
-   * @return true if contains
+   * @returns true if contains
    */
   public contains(envelope: GeometryEnvelope): boolean {
     return this.containsWithEpsilon(envelope, 0.0);
@@ -660,7 +660,7 @@ export class GeometryEnvelope {
    *
    * @param envelope geometry envelope
    * @param epsilon epsilon equality tolerance
-   * @return true if contains
+   * @returns true if contains
    * @since 1.1.1
    */
   public containsWithEpsilon(
@@ -677,7 +677,7 @@ export class GeometryEnvelope {
 
   /**
    * Build a geometry representation of the geometry envelope
-   * @return geometry, polygon or point
+   * @returnsgeometry, polygon or point
    */
   public buildGeometry(): Polygon | Point {
     let geometry: Polygon | Point;
@@ -698,7 +698,7 @@ export class GeometryEnvelope {
 
   /**
    * Copy the geometry envelope
-   * @return geometry envelope copy
+   * @returnsgeometry envelope copy
    */
   public copy(): GeometryEnvelope {
     const envelopeCopy = new GeometryEnvelope();

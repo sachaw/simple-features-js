@@ -38,7 +38,7 @@ export abstract class Geometry {
 
   /**
    * Get the geometry type
-   * @return geometry type
+   * @returnsgeometry type
    */
   public get geometryType(): GeometryType {
     return this._geometryType;
@@ -46,7 +46,7 @@ export abstract class Geometry {
 
   /**
    * Does the geometry have z coordinates
-   * @return true if has z coordinates
+   * @returns true if has z coordinates
    */
   public get hasZ(): boolean {
     return this._hasZ;
@@ -62,7 +62,7 @@ export abstract class Geometry {
 
   /**
    * Does the geometry have z coordinates
-   * @return true if has z coordinates
+   * @returns true if has z coordinates
    * @see #hasZ()
    */
   public get is3D(): boolean {
@@ -71,7 +71,7 @@ export abstract class Geometry {
 
   /**
    * Does the geometry have m coordinates
-   * @return true if has m coordinates
+   * @returns true if has m coordinates
    */
   public get hasM(): boolean {
     return this._hasM;
@@ -101,7 +101,7 @@ export abstract class Geometry {
   /**
    * Determine if the geometries contain a Z value
    * @param geometries list of geometries
-   * @return true if has z
+   * @returns true if has z
    */
   public static hasZ(
     geometries: Geometry[],
@@ -119,7 +119,7 @@ export abstract class Geometry {
   /**
    * Determine if the geometries contain a M value
    * @param geometries list of geometries
-   * @return true if has m
+   * @returns true if has m
    */
   public static hasM(
     geometries: Geometry[],
@@ -136,7 +136,7 @@ export abstract class Geometry {
 
   /**
    * Does the geometry have m coordinates.
-   * @return true if has m coordinates
+   * @returns true if has m coordinates
    * @see #hasM()
    */
   public isMeasured(): boolean {
@@ -145,7 +145,7 @@ export abstract class Geometry {
 
   /**
    * Get the minimum bounding box for this Geometry
-   * @return geometry envelope
+   * @returnsgeometry envelope
    */
   public getEnvelope(): GeometryEnvelope {
     return GeometryEnvelopeBuilder.buildEnvelope(this);
@@ -161,7 +161,7 @@ export abstract class Geometry {
 
   /**
    * Get the inherent dimension (0, 1, or 2) for this Geometry
-   * @return dimension
+   * @returnsdimension
    */
   public getDimension(): number {
     return GeometryUtils.getDimension(this);
@@ -173,7 +173,7 @@ export abstract class Geometry {
    * and y coordinate of the resulting point are calculated and populated. The
    * resulting {@link Point#getZ()} and {@link Point#getM()} methods will
    * always return null.
-   * @return centroid point
+   * @returnscentroid point
    */
   public getCentroid(): Point {
     return GeometryUtils.getCentroid(this);
@@ -184,7 +184,7 @@ export abstract class Geometry {
    * the degree unit Geometry. Only the x and y coordinate of the resulting
    * point are calculated and populated. The resulting {@link Point#getZ()}
    * and {@link Point#getM()} methods will always return null.
-   * @return centroid point
+   * @returnscentroid point
    */
   public getDegreesCentroid(): Point {
     return GeometryUtils.getDegreesCentroid(this);
@@ -192,23 +192,27 @@ export abstract class Geometry {
 
   /**
    * Copy the geometry
-   * @return geometry copy
+   * @returnsgeometry copy
    */
   public abstract copy(): Geometry;
 
   /**
    * Is the Geometry empty
-   * @return true if empty
+   * @returns true if empty
    */
   public abstract isEmpty(): boolean;
 
   /**
    * Determine if this Geometry has no anomalous geometric points, such as
    * self intersection or self tangency
-   * @return true if simple
+   * @returns true if simple
    */
   public abstract isSimple(): boolean;
 
+  /**
+   * Determine if this Geometry is a 2D curve
+   * @returns true if curve
+   */
   public equals(obj: Geometry): boolean {
     return !(
       this.geometryType !== obj.geometryType ||

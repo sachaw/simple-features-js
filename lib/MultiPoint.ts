@@ -17,6 +17,12 @@ export class MultiPoint extends GeometryCollection<Point> {
     super(geometryType, hasZ, hasM);
   }
 
+  /**
+   * Create a multi point
+   * @param hasZ has z
+   * @param hasM has m
+   * @returns multi point
+   */
   public static create(
     hasZ?: boolean,
     hasM?: boolean,
@@ -24,6 +30,11 @@ export class MultiPoint extends GeometryCollection<Point> {
     return new MultiPoint(GeometryType.MultiPoint, hasZ, hasM);
   }
 
+  /**
+   * Create a multi point from points
+   * @param points points
+   * @returns multi point
+   */
   public static createFromPoints(points: Point[]): MultiPoint {
     const hasZ = Geometry.hasZ(points);
     const hasM = Geometry.hasM(points);
@@ -36,7 +47,7 @@ export class MultiPoint extends GeometryCollection<Point> {
 
   /**
    * Get the points
-   * @return points
+   * @returnspoints
    */
   public get points(): Point[] {
     return this.geometries;
@@ -68,7 +79,7 @@ export class MultiPoint extends GeometryCollection<Point> {
 
   /**
    * Get the number of points
-   * @return number of points
+   * @returnsnumber of points
    */
   public numPoints(): number {
     return this.numGeometries();
@@ -78,7 +89,7 @@ export class MultiPoint extends GeometryCollection<Point> {
    * Returns the Nth point
    *
    * @param n nth point to return
-   * @return point
+   * @returnspoint
    */
   public getPoint(n: number): Point {
     return this.getGeometry(n);

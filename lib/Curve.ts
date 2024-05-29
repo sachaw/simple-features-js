@@ -26,20 +26,20 @@ export abstract class Curve extends Geometry {
   /**
    * Get the start Point of this Curve
    *
-   * @return start point
+   * @returnsstart point
    */
   public abstract startPoint(): Point;
 
   /**
    * Get the end Point of this Curve
    *
-   * @return end point
+   * @returnsend point
    */
   public abstract endPoint(): Point;
 
   /**
    * Determine if this Curve is closed (start point = end point)
-   * @return true if closed
+   * @returns true if closed
    */
   public isClosed(): boolean {
     return !this.isEmpty() && this.startPoint().equals(this.endPoint());

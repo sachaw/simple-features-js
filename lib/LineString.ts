@@ -28,6 +28,12 @@ export class LineString extends Curve {
     this._points = [];
   }
 
+  /**
+   * Create a line string
+   * @param hasZ has z
+   * @param hasM has m
+   * @returns line string
+   */
   public static create(
     hasZ?: boolean,
     hasM?: boolean,
@@ -35,6 +41,11 @@ export class LineString extends Curve {
     return new LineString(GeometryType.LineString, hasZ, hasM);
   }
 
+  /**
+   * Create a line string from points
+   * @param points points
+   * @returns line string
+   */
   public static createFromPoints(points: Point[]): LineString {
     const hasZ = Geometry.hasZ(points);
     const hasM = Geometry.hasM(points);
@@ -45,7 +56,7 @@ export class LineString extends Curve {
 
   /**
    * Get the points
-   * @return points
+   * @returnspoints
    */
   public get points(): Point[] {
     return this._points;
@@ -80,7 +91,7 @@ export class LineString extends Curve {
 
   /**
    * Get the number of points
-   * @return number of points
+   * @returnsnumber of points
    */
   public numPoints(): number {
     return this._points.length;
@@ -89,7 +100,7 @@ export class LineString extends Curve {
   /**
    * Returns the Nth point
    * @param n nth point to return
-   * @return point
+   * @returnspoint
    */
   public getPoint(n: number): Point {
     return this._points[n];

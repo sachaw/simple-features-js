@@ -11,6 +11,11 @@ export class EventQueue implements Iterable<Event> {
    */
   private _events: Event[] = [];
 
+  /**
+   * Create an event queue from a line string
+   * @param ring line string
+   * @returns event queue
+   */
   public static createFromLineString(ring: LineString): EventQueue {
     const eventQueue = new EventQueue();
     eventQueue.addRing(ring, 0);
@@ -18,6 +23,11 @@ export class EventQueue implements Iterable<Event> {
     return eventQueue;
   }
 
+  /**
+   * Create an event queue from line strings
+   * @param rings line strings
+   * @returns event queue
+   */
   public static createFromLineStrings(rings: LineString[]): EventQueue {
     const eventQueue = new EventQueue();
     for (let i = 0; i < rings.length; i++) {
@@ -64,6 +74,10 @@ export class EventQueue implements Iterable<Event> {
     );
   }
 
+  /**
+   * Iterator for events
+   * @returns iterator for events
+   */
   [Symbol.iterator](): Iterator<Event> {
     return this._events[Symbol.iterator]();
   }

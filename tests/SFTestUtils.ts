@@ -14,6 +14,7 @@ import {
   CurvePolygon,
   GeometryCollection,
   GeometryType,
+  GeometryTypeUtils,
   LineString,
   MultiLineString,
   MultiPoint,
@@ -62,7 +63,7 @@ export const compareGeometries = (
     switch (expected.geometryType) {
       case GeometryType.Geometry: {
         assert(`Unexpected Geometry Type of ${
-          GeometryType.nameFromType(
+          GeometryTypeUtils.nameFromType(
             expected.geometryType,
           )
         } which is abstract`);
@@ -125,7 +126,7 @@ export const compareGeometries = (
       case GeometryType.Curve: {
         assert(
           `Unexpected Geometry Type of ${
-            GeometryType.nameFromType(
+            GeometryTypeUtils.nameFromType(
               expected.geometryType,
             )
           } which is abstract`,
@@ -135,7 +136,7 @@ export const compareGeometries = (
       case GeometryType.Surface: {
         assert(
           `Unexpected Geometry Type of ${
-            GeometryType.nameFromType(
+            GeometryTypeUtils.nameFromType(
               expected.geometryType,
             )
           } which is abstract`,
@@ -420,7 +421,7 @@ export const compareTriangle = (
 //  *
 //  * @param expected
 //  * @param actual
-//  * @return true if equal
+//  * @returns true if equal
 //  */
 // export const equalByteArrays = (expected, actual) => {
 //   let equal = expected.length === actual.length;
@@ -436,7 +437,7 @@ export const compareTriangle = (
  *
  * @param hasZ
  * @param hasM
- * @return Point
+ * @returnsPoint
  */
 export const createPoint = (hasZ: boolean, hasM: boolean) => {
   const x = Math.random() * 180.0 * (Math.random() < 0.5 ? 1 : -1);
@@ -457,7 +458,7 @@ export const createPoint = (hasZ: boolean, hasM: boolean) => {
  * @param hasZ
  * @param hasM
  * @param ring
- * @return LineString
+ * @returnsLineString
  */
 export const createLineString = (
   hasZ: boolean,
@@ -479,7 +480,7 @@ export const createLineString = (
  * Create a random polygon
  * @param hasZ
  * @param hasM
- * @return Polygon
+ * @returnsPolygon
  */
 export const createPolygon = (hasZ: boolean, hasM: boolean) => {
   const polygon = Polygon.create(hasZ, hasM);
@@ -495,7 +496,7 @@ export const createPolygon = (hasZ: boolean, hasM: boolean) => {
  *
  * @param hasZ
  * @param hasM
- * @return MultiPoint
+ * @returnsMultiPoint
  */
 export const createMultiPoint = (hasZ: boolean, hasM: boolean) => {
   const multiPoint = MultiPoint.create(hasZ, hasM);
@@ -511,7 +512,7 @@ export const createMultiPoint = (hasZ: boolean, hasM: boolean) => {
  *
  * @param hasZ
  * @param hasM
- * @return MultiLineString
+ * @returnsMultiLineString
  */
 export const createMultiLineString = (hasZ: boolean, hasM: boolean) => {
   const multiLineString = MultiLineString.create(hasZ, hasM);
@@ -527,7 +528,7 @@ export const createMultiLineString = (hasZ: boolean, hasM: boolean) => {
  *
  * @param hasZ
  * @param hasM
- * @return MultiPolygon
+ * @returnsMultiPolygon
  */
 export const createMultiPolygon = (hasZ: boolean, hasM: boolean) => {
   const multiPolygon = MultiPolygon.create(hasZ, hasM);
@@ -543,7 +544,7 @@ export const createMultiPolygon = (hasZ: boolean, hasM: boolean) => {
  *
  * @param hasZ
  * @param hasM
- * @return GeometryCollection
+ * @returnsGeometryCollection
  */
 export const createGeometryCollection = (hasZ: boolean, hasM: boolean) => {
   const geometryCollection = GeometryCollection.create(hasZ, hasM);
@@ -613,7 +614,7 @@ export const createRandomPoint = (
  * @param hasZ
  * @param hasM
  * @param ring
- * @return CompoundCurve
+ * @returnsCompoundCurve
  */
 export const createCompoundCurve = (
   hasZ: boolean,
@@ -638,7 +639,7 @@ export const createCompoundCurve = (
  *
  * @param hasZ
  * @param hasM
- * @return CurvePolygon
+ * @returnsCurvePolygon
  */
 export const createCurvePolygon = (hasZ: boolean, hasM: boolean) => {
   const curvePolygon = CurvePolygon.create(hasZ, hasM);
@@ -651,6 +652,6 @@ export const createCurvePolygon = (hasZ: boolean, hasM: boolean) => {
 
 /**
  * Randomly return true or false
- * @return true or false
+ * @returns true or false
  */
 export const coinFlip = () => Math.random() < 0.5;

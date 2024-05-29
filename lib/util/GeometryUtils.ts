@@ -28,6 +28,9 @@ import {
   SFException,
 } from "../internal.ts";
 
+/**
+ * Geometry Hierarchy type
+ */
 export type GeometryHierarchy = Map<
   GeometryType,
   GeometryHierarchy | undefined
@@ -46,7 +49,7 @@ export class GeometryUtils {
    * Get the dimension of the Geometry, 0 for points, 1 for curves, 2 for
    * surfaces. If a collection, the largest dimension is returned.
    * @param geometry geometry object
-   * @return dimension (0, 1, or 2)
+   * @returnsdimension (0, 1, or 2)
    */
   public static getDimension(
     geometry: Geometry,
@@ -101,7 +104,7 @@ export class GeometryUtils {
    * Get the Pythagorean theorem distance between two points
    * @param point1 point 1
    * @param point2 point 2
-   * @return distance
+   * @returnsdistance
    */
   public static distance(point1: Point, point2: Point): number {
     const diffX = point1.x - point2.x;
@@ -114,7 +117,7 @@ export class GeometryUtils {
    * Get the Pythagorean theorem distance between the line end points
    *
    * @param line line
-   * @return distance
+   * @returnsdistance
    * @since 1.1.1
    */
   public static distanceFromLine(line: Line): number {
@@ -126,7 +129,7 @@ export class GeometryUtils {
    *
    * @param point1 point 1
    * @param point2 point 2
-   * @return bearing angle in degrees between 0 and 360
+   * @returnsbearing angle in degrees between 0 and 360
    * @since 1.1.1
    */
   public static bearing(point1: Point, point2: Point): number {
@@ -143,7 +146,7 @@ export class GeometryUtils {
    * Get the bearing heading in degrees between line end points in degrees
    *
    * @param line line
-   * @return bearing angle in degrees between 0 inclusively and 360 exclusively
+   * @returnsbearing angle in degrees between 0 inclusively and 360 exclusively
    * @since 1.1.1
    */
   public static bearingLine(line: Line): number {
@@ -154,7 +157,7 @@ export class GeometryUtils {
    * Determine if the bearing is in any north direction
    *
    * @param bearing bearing angle in degrees
-   * @return true if north bearing
+   * @returns true if north bearing
    * @since 1.1.1
    */
   public static isNorthBearing(bearing: number): boolean {
@@ -169,7 +172,7 @@ export class GeometryUtils {
    * Determine if the bearing is in any east direction
    *
    * @param bearing bearing angle in degrees
-   * @return true if east bearing
+   * @returns true if east bearing
    * @since 1.1.1
    */
   public static isEastBearing(bearing: number): boolean {
@@ -184,7 +187,7 @@ export class GeometryUtils {
    * Determine if the bearing is in any south direction
    *
    * @param bearing bearing angle in degrees
-   * @return true if south bearing
+   * @returns true if south bearing
    * @since 1.1.1
    */
   public static isSouthBearing(bearing: number): boolean {
@@ -199,7 +202,7 @@ export class GeometryUtils {
    * Determine if the bearing is in any west direction
    *
    * @param bearing bearing angle in degrees
-   * @return true if west bearing
+   * @returns true if west bearing
    * @since 1.1.1
    */
   public static isWestBearing(bearing: number): boolean {
@@ -210,7 +213,7 @@ export class GeometryUtils {
    * Convert degrees to radians
    *
    * @param degrees degrees
-   * @return radians
+   * @returnsradians
    * @since 1.1.1
    */
   public static degreesToRadians(degrees: number): number {
@@ -221,7 +224,7 @@ export class GeometryUtils {
    * Convert radians to degrees
    *
    * @param radians radians
-   * @return degrees
+   * @returnsdegrees
    * @since 1.1.1
    */
   public static radiansToDegrees(radians: number): number {
@@ -235,7 +238,7 @@ export class GeometryUtils {
    * resulting {@link Point#getZ()} and {@link Point#getM()} methods will
    * always return null.
    * @param geometry geometry object
-   * @return centroid point
+   * @returnscentroid point
    */
   public static getCentroid(
     geometry: Geometry,
@@ -274,7 +277,7 @@ export class GeometryUtils {
    * and {@link Point#getM()} methods will always return null.
    *
    * @param geometry  geometry object
-   * @return centroid point
+   * @returnscentroid point
    */
   public static getDegreesCentroid(
     geometry: Geometry,
@@ -836,7 +839,7 @@ export class GeometryUtils {
    *
    * @param points geometry points
    * @param tolerance minimum tolerance in meters for consecutive points
-   * @return simplified points
+   * @returnssimplified points
    * @since 1.0.4
    */
   public static simplifyPoints(points: Point[], tolerance: number): Point[] {
@@ -858,7 +861,7 @@ export class GeometryUtils {
    * @param tolerance minimum tolerance in meters for consecutive points
    * @param startIndex start index
    * @param endIndex end index
-   * @return simplified points
+   * @returnssimplified points
    */
   private static _simplifyPoints(
     points: Point[],
@@ -921,7 +924,7 @@ export class GeometryUtils {
    * @param point point
    * @param lineStart point representing the line start
    * @param lineEnd point representing the line end
-   * @return distance in meters
+   * @returnsdistance in meters
    */
   public static perpendicularDistance(
     point: Point,
@@ -963,7 +966,7 @@ export class GeometryUtils {
    * Check if the point is in the polygon
    * @param point point
    * @param polygon polygon
-   * @return true if in the polygon
+   * @returns true if in the polygon
    */
   public static pointInPolygon(
     point: Point,
@@ -982,7 +985,7 @@ export class GeometryUtils {
    * @param point point
    * @param polygon polygon
    * @param epsilon epsilon line tolerance
-   * @return true if in the polygon
+   * @returns true if in the polygon
    */
   public static pointInPolygonWithEpsilon(
     point: Point,
@@ -1022,7 +1025,7 @@ export class GeometryUtils {
    *
    * @param point point
    * @param ring polygon ring
-   * @return true if in the polygon
+   * @returns true if in the polygon
    */
   public static pointInPolygonRing(point: Point, ring: LineString): boolean {
     return GeometryUtils.pointInPolygonRingWithEpsilon(
@@ -1038,7 +1041,7 @@ export class GeometryUtils {
    * @param point point
    * @param ring polygon ring
    * @param epsilon epsilon line tolerance
-   * @return true if in the polygon
+   * @returns true if in the polygon
    */
   public static pointInPolygonRingWithEpsilon(
     point: Point,
@@ -1056,7 +1059,7 @@ export class GeometryUtils {
    * Check if the point is in the polygon points
    * @param point point
    * @param points polygon points
-   * @return true if in the polygon
+   * @returns true if in the polygon
    */
   public static pointInPolygonRingPoints(
     point: Point,
@@ -1074,7 +1077,7 @@ export class GeometryUtils {
    * @param point point
    * @param points polygon points
    * @param epsilon epsilon line tolerance
-   * @return true if in the polygon
+   * @returns true if in the polygon
    */
   public static pointInPolygonRingPointsWithEpsilon(
     point: Point,
@@ -1125,7 +1128,7 @@ export class GeometryUtils {
    * Check if the point is on the polygon edge
    * @param point point
    * @param polygon polygon
-   * @return true if on the polygon edge
+   * @returns true if on the polygon edge
    */
   public static pointOnPolygonEdge(
     point: Point,
@@ -1144,7 +1147,7 @@ export class GeometryUtils {
    * @param point point
    * @param polygon polygon
    * @param epsilon epsilon line tolerance
-   * @return true if on the polygon edge
+   * @returns true if on the polygon edge
    */
   public static pointOnPolygonEdgeWithEpsilon(
     point: Point,
@@ -1165,7 +1168,7 @@ export class GeometryUtils {
    * Check if the point is on the polygon ring edge
    * @param point point
    * @param ring polygon ring
-   * @return true if on the polygon edge
+   * @returns true if on the polygon edge
    */
   public static pointOnPolygonEdgeRing(
     point: Point,
@@ -1184,7 +1187,7 @@ export class GeometryUtils {
    * @param point point
    * @param ring polygon ring
    * @param epsilon epsilon line tolerance
-   * @return true if on the polygon edge
+   * @returns true if on the polygon edge
    */
   public static pointOnPolygonEdgeRingWithEpsilon(
     point: Point,
@@ -1202,7 +1205,7 @@ export class GeometryUtils {
    * Check if the point is on the polygon ring edge points
    * @param point point
    * @param points polygon points
-   * @return true if on the polygon edge
+   * @returns true if on the polygon edge
    */
   public static pointOnPolygonEdgePoints(
     point: Point,
@@ -1220,7 +1223,7 @@ export class GeometryUtils {
    * @param point point
    * @param points polygon points
    * @param epsilon epsilon line tolerance
-   * @return true if on the polygon edge
+   * @returns true if on the polygon edge
    */
   public static pointOnPolygonEdgePointsWithEpsilon(
     point: Point,
@@ -1239,7 +1242,7 @@ export class GeometryUtils {
    * Check if the polygon outer ring is explicitly closed, where the first and
    * last point are the same
    * @param polygon polygon
-   * @return true if the first and last points are the same
+   * @returns true if the first and last points are the same
    */
   public static closedPolygon(polygon: Polygon): boolean {
     return (
@@ -1252,7 +1255,7 @@ export class GeometryUtils {
    * Check if the polygon ring is explicitly closed, where the first and last
    * point are the same
    * @param ring polygon ring
-   * @return true if the first and last points are the same
+   * @returns true if the first and last points are the same
    */
   public static closedPolygonRing(ring: LineString): boolean {
     return GeometryUtils.closedPolygonPoints(ring.points);
@@ -1262,7 +1265,7 @@ export class GeometryUtils {
    * Check if the polygon ring points are explicitly closed, where the first
    * and last point are the same
    * @param points polygon ring points
-   * @return true if the first and last points are the same
+   * @returns true if the first and last points are the same
    */
   public static closedPolygonPoints(points: Point[]): boolean {
     let closed = false;
@@ -1278,7 +1281,7 @@ export class GeometryUtils {
    * Check if the point is on the line
    * @param point point
    * @param line  line
-   * @return true if on the line
+   * @returns true if on the line
    */
   public static pointOnLine(point: Point, line: LineString): boolean {
     return GeometryUtils.pointOnLineWithEpsilon(
@@ -1293,7 +1296,7 @@ export class GeometryUtils {
    * @param point point
    * @param line line
    * @param epsilon epsilon line tolerance
-   * @return true if on the line
+   * @returns true if on the line
    */
   public static pointOnLineWithEpsilon(
     point: Point,
@@ -1311,7 +1314,7 @@ export class GeometryUtils {
    * Check if the point is on the line represented by the points
    * @param point point
    * @param points line points
-   * @return true if on the line
+   * @returns true if on the line
    */
   public static pointOnLinePoints(point: Point, points: Point[]): boolean {
     return GeometryUtils.pointOnLinePointsWithEpsilon(
@@ -1326,7 +1329,7 @@ export class GeometryUtils {
    * @param point point
    * @param points line points
    * @param epsilon epsilon line tolerance
-   * @return true if on the line
+   * @returns true if on the line
    */
   public static pointOnLinePointsWithEpsilon(
     point: Point,
@@ -1341,7 +1344,7 @@ export class GeometryUtils {
    * @param point point
    * @param point1 path point 1
    * @param point2 path point 2
-   * @return true if on the path
+   * @returns true if on the path
    */
   public static pointOnPath(
     point: Point,
@@ -1362,7 +1365,7 @@ export class GeometryUtils {
    * @param point1 path point 1
    * @param point2 path point 2
    * @param epsilon epsilon line tolerance
-   * @return true if on the path
+   * @returns true if on the path
    */
   public static pointOnPathWithEpsilon(
     point: Point,
@@ -1392,7 +1395,7 @@ export class GeometryUtils {
    * @param points path points
    * @param epsilon epsilon line tolerance
    * @param circular true if a path exists between the first and last point (a non explicitly closed polygon)
-   * @return true if on the path
+   * @returns true if on the path
    */
   private static pointOnPathPointArray(
     point: Point,
@@ -1427,7 +1430,7 @@ export class GeometryUtils {
    *
    * @param line1 first line
    * @param line2 second line
-   * @return intersection point or undefined if no intersection
+   * @returnsintersection point or undefined if no intersection
    * @since 1.1.1
    */
   public static intersectionLine(line1: Line, line2: Line): Point | undefined {
@@ -1446,7 +1449,7 @@ export class GeometryUtils {
    * @param line1Point2 second point of the first line
    * @param line2Point1 first point of the second line
    * @param line2Point2 second point of the second line
-   * @return intersection point or undefined if no intersection
+   * @returnsintersection point or undefined if no intersection
    * @since 2.1.0
    */
   public static intersection(
@@ -1480,7 +1483,7 @@ export class GeometryUtils {
    * Convert a geometry in degrees to a geometry in meters
    *
    * @param geometry geometry in degrees
-   * @return geometry in meters
+   * @returnsgeometry in meters
    * @since 1.1.1
    */
   public static degreesToMeters(
@@ -1584,7 +1587,7 @@ export class GeometryUtils {
    * Convert a point in degrees to a point in meters
    *
    * @param point point in degrees
-   * @return point in meters
+   * @returnspoint in meters
    * @since 1.1.1
    */
   public static degreesToMetersPoint(point: Point): Point {
@@ -1602,7 +1605,7 @@ export class GeometryUtils {
    *
    * @param x x value in degrees
    * @param y y value in degrees
-   * @return point in meters
+   * @returnspoint in meters
    * @since 1.1.1
    */
   public static degreesToMetersCoord(x: number, y: number): Point {
@@ -1631,7 +1634,7 @@ export class GeometryUtils {
    * Convert a multi point in degrees to a multi point in meters
    *
    * @param multiPoint multi point in degrees
-   * @return multi point in meters
+   * @returnsmulti point in meters
    * @since 1.1.1
    */
   public static degreesToMetersMultiPoint(multiPoint: MultiPoint): MultiPoint {
@@ -1646,7 +1649,7 @@ export class GeometryUtils {
    * Convert a line string in degrees to a line string in meters
    *
    * @param lineString line string in degrees
-   * @return line string in meters
+   * @returnsline string in meters
    * @since 2.2.0
    */
   public static degreesToMetersLineString(lineString: LineString): LineString {
@@ -1661,7 +1664,7 @@ export class GeometryUtils {
    * Convert a line in degrees to a line in meters
    *
    * @param line line in degrees
-   * @return line in meters
+   * @returnsline in meters
    * @since 1.1.1
    */
   public static degreesToMetersLine(line: Line): Line {
@@ -1676,7 +1679,7 @@ export class GeometryUtils {
    * Convert a multi line string in degrees to a multi line string in meters
    *
    * @param multiLineString multi line string in degrees
-   * @return multi line string in meters
+   * @returnsmulti line string in meters
    * @since 1.1.1
    */
   public static degreesToMetersMultiLineString(
@@ -1696,7 +1699,7 @@ export class GeometryUtils {
    * Convert a polygon in degrees to a polygon in meters
    *
    * @param polygon polygon in degrees
-   * @return polygon in meters
+   * @returnspolygon in meters
    * @since 1.1.1
    */
   public static degreesToMetersPolygon(
@@ -1713,7 +1716,7 @@ export class GeometryUtils {
    * Convert a multi polygon in degrees to a multi polygon in meters
    *
    * @param multiPolygon multi polygon in degrees
-   * @return multi polygon in meters
+   * @returnsmulti polygon in meters
    * @since 1.1.1
    */
   public static degreesToMetersMultiPolygon(
@@ -1733,7 +1736,7 @@ export class GeometryUtils {
    * Convert a circular string in degrees to a circular string in meters
    *
    * @param circularString circular string in degrees
-   * @return circular string in meters
+   * @returnscircular string in meters
    * @since 1.1.1
    */
   public static degreesToMetersCircularString(
@@ -1753,7 +1756,7 @@ export class GeometryUtils {
    * Convert a compound curve in degrees to a compound curve in meters
    *
    * @param compoundCurve compound curve in degrees
-   * @return compound curve in meters
+   * @returnscompound curve in meters
    * @since 1.1.1
    */
   public static degreesToMetersCompundCurve(
@@ -1773,7 +1776,7 @@ export class GeometryUtils {
    * Convert a curve polygon in degrees to a curve polygon in meters
    *
    * @param curvePolygon curve polygon in degrees
-   * @return curve polygon in meters
+   * @returnscurve polygon in meters
    * @since 1.1.1
    */
   public static degreesToMetersCurvePolygon(
@@ -1790,7 +1793,7 @@ export class GeometryUtils {
    * Convert a polyhedral surface in degrees to a polyhedral surface in meters
    *
    * @param polyhedralSurface polyhedral surface in degrees
-   * @return polyhedral surface in meters
+   * @returnspolyhedral surface in meters
    * @since 1.1.1
    */
   public static degreesToMetersPolyhedralSurface(
@@ -1810,7 +1813,7 @@ export class GeometryUtils {
    * Convert a geometry in meters to a geometry in degrees
    *
    * @param geometry geometry in meters
-   * @return geometry in degrees
+   * @returnsgeometry in degrees
    * @since 1.1.1
    */
   public static metersToDegrees(
@@ -1914,7 +1917,7 @@ export class GeometryUtils {
    * Convert a point in meters to a point in degrees
    *
    * @param point point in meters
-   * @return point in degrees
+   * @returnspoint in degrees
    * @since 1.1.1
    */
   public static metersToDegreesPoint(point: Point): Point {
@@ -1932,7 +1935,7 @@ export class GeometryUtils {
    *
    * @param x x value in meters
    * @param y y value in meters
-   * @return point in degrees
+   * @returnspoint in degrees
    * @since 1.1.1
    */
   public static metersToDegreesCoord(x: number, y: number): Point {
@@ -1955,7 +1958,7 @@ export class GeometryUtils {
    * Convert a multi point in meters to a multi point in degrees
    *
    * @param multiPoint multi point in meters
-   * @return multi point in degrees
+   * @returnsmulti point in degrees
    * @since 1.1.1
    */
   public static metersToDegreesMultiPoint(multiPoint: MultiPoint): MultiPoint {
@@ -1970,7 +1973,7 @@ export class GeometryUtils {
    * Convert a line string in meters to a line string in degrees
    *
    * @param lineString line string in meters
-   * @return line string in degrees
+   * @returnsline string in degrees
    * @since 1.1.1
    */
   public static metersToDegreesLineString(lineString: LineString): LineString {
@@ -1985,7 +1988,7 @@ export class GeometryUtils {
    * Convert a line in meters to a line in degrees
    *
    * @param line line in meters
-   * @return line in degrees
+   * @returnsline in degrees
    * @since 1.1.1
    */
   public static metersToDegreesLine(line: Line): Line {
@@ -2000,7 +2003,7 @@ export class GeometryUtils {
    * Convert a multi line string in meters to a multi line string in degrees
    *
    * @param multiLineString multi line string in meters
-   * @return multi line string in degrees
+   * @returnsmulti line string in degrees
    * @since 1.1.1
    */
   public static metersToDegreesMultiLineString(
@@ -2022,7 +2025,7 @@ export class GeometryUtils {
    * Convert a polygon in meters to a polygon in degrees
    *
    * @param polygon polygon in meters
-   * @return polygon in degrees
+   * @returnspolygon in degrees
    * @since 1.1.1
    */
   public static metersToDegreesPolygon(
@@ -2039,7 +2042,7 @@ export class GeometryUtils {
    * Convert a multi polygon in meters to a multi polygon in degrees
    *
    * @param multiPolygon multi polygon in meters
-   * @return multi polygon in degrees
+   * @returnsmulti polygon in degrees
    * @since 1.1.1
    */
   public static metersToDegreesMultiPolygon(
@@ -2059,7 +2062,7 @@ export class GeometryUtils {
    * Convert a circular string in meters to a circular string in degrees
    *
    * @param circularString circular string in meters
-   * @return circular string in degrees
+   * @returnscircular string in degrees
    * @since 1.1.1
    */
   public static metersToDegreesCircularString(
@@ -2079,7 +2082,7 @@ export class GeometryUtils {
    * Convert a compound curve in meters to a compound curve in degrees
    *
    * @param compoundCurve compound curve in meters
-   * @return compound curve in degrees
+   * @returnscompound curve in degrees
    * @since 1.1.1
    */
   public static metersToDegreesCompoundCurve(
@@ -2101,7 +2104,7 @@ export class GeometryUtils {
    * Convert a curve polygon in meters to a curve polygon in degrees
    *
    * @param curvePolygon curve polygon in meters
-   * @return curve polygon in degrees
+   * @returnscurve polygon in degrees
    * @since 2.2.0
    */
   public static metersToDegreesCurvePolygon(
@@ -2118,7 +2121,7 @@ export class GeometryUtils {
    * Convert a polyhedral surface in meters to a polyhedral surface in degrees
    *
    * @param polyhedralSurface polyhedral surface in meters
-   * @return polyhedral surface in degrees
+   * @returnspolyhedral surface in degrees
    * @since 1.1.1
    */
   public static metersToDegreesPolyhedralSurface(
@@ -2137,7 +2140,7 @@ export class GeometryUtils {
   /**
    * Get a WGS84 bounded geometry envelope
    *
-   * @return geometry envelope
+   * @returnsgeometry envelope
    * @since 1.1.1
    */
   public static wgs84Envelope(): GeometryEnvelope {
@@ -2153,7 +2156,7 @@ export class GeometryUtils {
    * Get a WGS84 bounded geometry envelope used for projection transformations
    * (degrees to meters)
    *
-   * @return geometry envelope
+   * @returnsgeometry envelope
    * @since 1.1.1
    */
   public static wgs84TransformableEnvelope(): GeometryEnvelope {
@@ -2168,7 +2171,7 @@ export class GeometryUtils {
   /**
    * Get a Web Mercator bounded geometry envelope
    *
-   * @return geometry envelope
+   * @returnsgeometry envelope
    * @since 1.1.1
    */
   public static webMercatorEnvelope(): GeometryEnvelope {
@@ -2183,7 +2186,7 @@ export class GeometryUtils {
   /**
    * Get a WGS84 geometry envelope with Web Mercator bounds
    *
-   * @return geometry envelope
+   * @returnsgeometry envelope
    * @since 1.1.1
    */
   public static wgs84EnvelopeWithWebMercator(): GeometryEnvelope {
@@ -2201,7 +2204,7 @@ export class GeometryUtils {
    * intersections with the envelope.
    *
    * @param geometry geometry in meters
-   * @return cropped geometry in meters or undefined
+   * @returnscropped geometry in meters or undefined
    * @since 1.1.1
    */
   public static cropWebMercator(
@@ -2217,7 +2220,7 @@ export class GeometryUtils {
    *
    * @param geometry geometry in meters
    * @param envelope envelope in meters
-   * @return cropped geometry in meters or undefined
+   * @returnscropped geometry in meters or undefined
    * @since 1.1.1
    */
   public static crop(
@@ -2323,7 +2326,7 @@ export class GeometryUtils {
    *
    * @param point point
    * @param envelope envelope
-   * @return cropped point or undefined
+   * @returnscropped point or undefined
    * @since 1.1.1
    */
   public static cropPoint(
@@ -2345,7 +2348,7 @@ export class GeometryUtils {
    *
    * @param points consecutive points
    * @param envelope envelope in meters
-   * @return cropped points in meters or empty array
+   * @returnscropped points in meters or empty array
    * @since 1.1.1
    */
   public static cropPoints(
@@ -2505,7 +2508,7 @@ export class GeometryUtils {
    *
    * @param multiPoint multi point
    * @param envelope envelope
-   * @return cropped multi point or undefined
+   * @returnscropped multi point or undefined
    * @since 1.1.1
    */
   public static cropMultiPoint(
@@ -2535,7 +2538,7 @@ export class GeometryUtils {
    *
    * @param lineString line string in meters
    * @param envelope envelope in meters
-   * @return cropped line string in meters or undefined
+   * @returnscropped line string in meters or undefined
    * @since 1.1.1
    */
   public static cropLineString(
@@ -2559,7 +2562,7 @@ export class GeometryUtils {
    *
    * @param line line in meters
    * @param envelope envelope in meters
-   * @return cropped line in meters or undefined
+   * @returnscropped line in meters or undefined
    * @since 1.1.1
    */
   public static cropLine(
@@ -2583,7 +2586,7 @@ export class GeometryUtils {
    *
    * @param multiLineString multi line string in meters
    * @param envelope envelope in meters
-   * @return cropped multi line string in meters or undefined
+   * @returnscropped multi line string in meters or undefined
    * @since 1.1.1
    */
   public static cropMultiLineString(
@@ -2613,7 +2616,7 @@ export class GeometryUtils {
    *
    * @param polygon polygon in meters
    * @param envelope envelope in meters
-   * @return cropped polygon in meters or undefined
+   * @returnscropped polygon in meters or undefined
    * @since 1.1.1
    */
   public static cropPolygon(
@@ -2649,7 +2652,7 @@ export class GeometryUtils {
    *
    * @param multiPolygon multi polygon in meters
    * @param envelope envelope in meters
-   * @return cropped multi polygon in meters or undefined
+   * @returnscropped multi polygon in meters or undefined
    * @since 1.1.1
    */
   public static cropMultiPolygon(
@@ -2683,7 +2686,7 @@ export class GeometryUtils {
    *
    * @param circularString circular string in meters
    * @param envelope envelope in meters
-   * @return cropped circular string in meters or undefined
+   * @returnscropped circular string in meters or undefined
    * @since 1.1.1
    */
   public static cropCircularString(
@@ -2710,7 +2713,7 @@ export class GeometryUtils {
    *
    * @param compoundCurve compound curve in meters
    * @param envelope envelope in meters
-   * @return cropped compound curve in meters or undefined
+   * @returnscropped compound curve in meters or undefined
    * @since 1.1.1
    */
   public static cropCompoundCurve(
@@ -2740,7 +2743,7 @@ export class GeometryUtils {
    *
    * @param curvePolygon curve polygon in meters
    * @param envelope envelope in meters
-   * @return cropped curve polygon in meters or undefined
+   * @returnscropped curve polygon in meters or undefined
    * @since 1.1.1
    */
   public static cropCurvePolygon(
@@ -2770,7 +2773,7 @@ export class GeometryUtils {
    *
    * @param polyhedralSurface polyhedral surface in meters
    * @param envelope envelope in meters
-   * @return cropped polyhedral surface in meters or undefined
+   * @returnscropped polyhedral surface in meters or undefined
    * @since 1.1.1
    */
   public static cropPolyhedralSurface(
@@ -2803,7 +2806,7 @@ export class GeometryUtils {
    *
    * @param point1 point 1
    * @param point2 point 2
-   * @return true if equal
+   * @returns true if equal
    * @since 1.1.1
    */
   public static isEqual(point1: Point, point2: Point): boolean {
@@ -2821,7 +2824,7 @@ export class GeometryUtils {
    * @param point1 point 1
    * @param point2 point 2
    * @param epsilon epsilon equality tolerance
-   * @return true if equal
+   * @returns true if equal
    * @since 1.1.1
    */
   public static isEqualWithEpsilon(
@@ -2856,7 +2859,7 @@ export class GeometryUtils {
    *
    * @param envelope envelope
    * @param point point
-   * @return true if contains
+   * @returns true if contains
    * @since 1.1.1
    */
   public static containsPoint(
@@ -2876,7 +2879,7 @@ export class GeometryUtils {
    *
    * @param envelope1 envelope 1
    * @param envelope2 envelope 2
-   * @return true if contains
+   * @returns true if contains
    * @since 1.1.1
    */
   public static containsGeometryEnvelope(
@@ -3196,7 +3199,7 @@ export class GeometryUtils {
    * the immediate parent. If the argument is GEOMETRY, an empty list is
    * returned, else the final type in the list will be GEOMETRY.
    * @param geometryType geometry type
-   * @return list of increasing parent types
+   * @returnslist of increasing parent types
    */
   public static parentHierarchy(geometryType: GeometryType): GeometryType[] {
     const hierarchy: GeometryType[] = [];
@@ -3213,7 +3216,7 @@ export class GeometryUtils {
   /**
    * Get the parent Geometry Type of the provided geometry type
    * @param geometryType geometry type
-   * @return parent geometry type or undefined if argument is GEOMETRY (no parent type)
+   * @returnsparent geometry type or undefined if argument is GEOMETRY (no parent type)
    */
   public static parentType(
     geometryType: GeometryType,
@@ -3301,7 +3304,7 @@ export class GeometryUtils {
   /**
    * Get the child type hierarchy of the provided geometry type.
    * @param geometryType geometry type
-   * @return child type hierarchy, undefined if no children
+   * @returnschild type hierarchy, undefined if no children
    */
   public static childHierarchy(
     geometryType: GeometryType,
@@ -3333,7 +3336,7 @@ export class GeometryUtils {
   /**
    * Get the immediate child Geometry Types of the provided geometry type
    * @param geometryType geometry type
-   * @return child geometry types, empty list if no child types
+   * @returnschild geometry types, empty list if no child types
    */
   public static childTypes(geometryType: GeometryType): GeometryType[] {
     const childTypes: GeometryType[] = [];

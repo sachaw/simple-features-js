@@ -27,6 +27,12 @@ export class PolyhedralSurface extends Surface {
     this._polygons = [];
   }
 
+  /**
+   * Create a polyhedral surface
+   * @param hasZ has z
+   * @param hasM has m
+   * @returns polyhedral surface
+   */
   public static create(
     hasZ?: boolean,
     hasM?: boolean,
@@ -34,6 +40,11 @@ export class PolyhedralSurface extends Surface {
     return new PolyhedralSurface(GeometryType.PolyhedralSurface, hasZ, hasM);
   }
 
+  /**
+   * Create a polyhedral surface from a polygon
+   * @param polygon polygon
+   * @returns polyhedral surface
+   */
   public static createFromPolygon(
     polygon: Polygon,
   ): PolyhedralSurface {
@@ -45,6 +56,11 @@ export class PolyhedralSurface extends Surface {
     return polyhedralSurface;
   }
 
+  /**
+   * Create a polyhedral surface from polygons
+   * @param polygons polygons
+   * @returns polyhedral surface
+   */
   public static createFromPolygons(
     polygons: Polygon[],
   ): PolyhedralSurface {
@@ -58,7 +74,7 @@ export class PolyhedralSurface extends Surface {
 
   /**
    * Get polygons
-   * @return polygons
+   * @returnspolygons
    */
   public get polygons(): Polygon[] {
     return this._polygons;
@@ -76,7 +92,7 @@ export class PolyhedralSurface extends Surface {
   /**
    * Get patches
    *
-   * @return patches
+   * @returnspatches
    * @see #getPolygons()
    */
   public get patches(): Polygon[] {
@@ -132,7 +148,7 @@ export class PolyhedralSurface extends Surface {
 
   /**
    * Get the number of polygons
-   * @return number of polygons
+   * @returnsnumber of polygons
    */
   public numPolygons(): number {
     return this._polygons.length;
@@ -140,7 +156,7 @@ export class PolyhedralSurface extends Surface {
 
   /**
    * Get the number of polygons
-   * @return number of polygons
+   * @returnsnumber of polygons
    * @see #numPolygons()
    */
   public numPatches(): number {
@@ -150,7 +166,7 @@ export class PolyhedralSurface extends Surface {
   /**
    * Get the Nth polygon
    * @param n nth polygon to return
-   * @return polygon
+   * @returnspolygon
    */
   public getPolygon(n: number): Polygon {
     return this._polygons[n];
@@ -159,7 +175,7 @@ export class PolyhedralSurface extends Surface {
   /**
    * Get the Nth polygon patch
    * @param n nth polygon patch to return
-   * @return polygon patch
+   * @returnspolygon patch
    * @see #getPolygon(int)
    */
   public getPatch(n: number): Polygon {

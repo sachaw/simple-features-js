@@ -32,10 +32,19 @@ export class CentroidSurface {
    */
   private _sum: Point = Point.create();
 
+  /**
+   * Create a centroid surface
+   * @returns centroid surface
+   */
   public static create(): CentroidSurface {
     return new CentroidSurface();
   }
 
+  /**
+   * Create a centroid surface from a geometry
+   * @param geometry geometry
+   * @returns centroid surface
+   */
   public static createFromGeometry(
     geometry: Geometry,
   ): CentroidSurface {
@@ -238,7 +247,7 @@ export class CentroidSurface {
    * @param point1 point 1
    * @param point2 point 2
    * @param point3 point 3
-   * @return 3 times centroid point
+   * @returns3 times centroid point
    */
   private static centroid3(point1: Point, point2: Point, point3: Point): Point {
     const x = point1.x + point2.x + point3.x;
@@ -252,7 +261,7 @@ export class CentroidSurface {
    * @param point1 point 1
    * @param point2 point 2
    * @param point3 point 3
-   * @return 2 times triangle area
+   * @returns2 times triangle area
    */
   private static area2(point1: Point, point2: Point, point3: Point): number {
     return (
@@ -263,7 +272,7 @@ export class CentroidSurface {
 
   /**
    * Get the centroid point
-   * @return centroid point
+   * @returnscentroid point
    */
   public getCentroid(): Point {
     return Point.createFromXY(

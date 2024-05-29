@@ -30,8 +30,8 @@ export class CompoundCurve extends Curve {
   }
 
   /**
-   * Create an empty compound curve
-   * @return compound curve
+   * Create a compound curve
+   * @returnscompound curve
    */
   public static create(
     hasZ?: boolean,
@@ -45,7 +45,7 @@ export class CompoundCurve extends Curve {
    * @param hasZ has Z values
    * @param hasM has M values
    * @param lineStrings line strings
-   * @return compound curve
+   * @returnscompound curve
    */
   public static createFromLineStrings(
     lineStrings: LineString[],
@@ -60,7 +60,7 @@ export class CompoundCurve extends Curve {
   /**
    * Create a compound curve
    * @param lineString line string
-   * @return compound curve
+   * @returnscompound curve
    */
   public static createFromLineString(lineString: LineString): CompoundCurve {
     const compoundCurve = CompoundCurve.create(
@@ -73,7 +73,7 @@ export class CompoundCurve extends Curve {
 
   /**
    * Get the line strings
-   * @return line strings
+   * @returnsline strings
    */
   public get lineStrings(): LineString[] {
     return this._lineStrings;
@@ -108,7 +108,7 @@ export class CompoundCurve extends Curve {
 
   /**
    * Get the number of line strings
-   * @return number of line strings
+   * @returnsnumber of line strings
    */
   public numLineStrings(): number {
     return this._lineStrings.length;
@@ -117,7 +117,7 @@ export class CompoundCurve extends Curve {
   /**
    * Returns the Nth line string
    * @param n  nth line string to return
-   * @return line string
+   * @returnsline string
    */
   public getLineString(n: number): LineString {
     return this._lineStrings[n];

@@ -18,7 +18,7 @@ export class MultiLineString extends MultiCurve<LineString> {
   }
 
   /**
-   * Create an empty multi line string
+   * Create a multi line string
    * @returns multi line string
    */
   public static create(
@@ -61,7 +61,7 @@ export class MultiLineString extends MultiCurve<LineString> {
 
   /**
    * Get the line strings
-   * @return line strings
+   * @returnsline strings
    */
   public get lineStrings(): LineString[] {
     return this.getCurves();
@@ -97,7 +97,7 @@ export class MultiLineString extends MultiCurve<LineString> {
   /**
    * Get the number of line strings
    *
-   * @return number of line strings
+   * @returnsnumber of line strings
    */
   public numLineStrings(): number {
     return this.numCurves();
@@ -106,7 +106,7 @@ export class MultiLineString extends MultiCurve<LineString> {
   /**
    * Returns the Nth line string
    * @param n nth line string to return
-   * @return line string
+   * @returnsline string
    */
   public getLineString(n: number): LineString {
     return this.getCurve(n);

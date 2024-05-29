@@ -45,10 +45,19 @@ export class DegreesCentroid {
    */
   private _z = 0;
 
+  /**
+   * Create a degrees centroid
+   * @returns degrees centroid
+   */
   public static create(): DegreesCentroid {
     return new DegreesCentroid();
   }
 
+  /**
+   * Create a degrees centroid from a geometry
+   * @param geometry geometry
+   * @returns degrees centroid
+   */
   public static createFromGeometry(
     geometry: Geometry,
   ): DegreesCentroid {
@@ -60,7 +69,7 @@ export class DegreesCentroid {
   /**
    * Get the degree geometry centroid
    * @param geometry geometry
-   * @return centroid point
+   * @returnscentroid point
    */
   public static getCentroid(geometry: Geometry): Point {
     return DegreesCentroid.createFromGeometry(geometry).getCentroid();
@@ -68,7 +77,7 @@ export class DegreesCentroid {
 
   /**
    * Get the centroid point
-   * @return centroid point
+   * @returnscentroid point
    */
   public getCentroid(): Point {
     let centroid: Point;
