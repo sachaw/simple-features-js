@@ -1,4 +1,4 @@
-import { RedBlackTree } from "red-black-tree-typed";
+import { ExtendedRedBlackTree } from "./ExtendedRedBlackTree.ts";
 import { Segment, SFException } from "../../internal.ts";
 import type { Comparator, Event, LineString, Point } from "../../internal.ts";
 
@@ -73,7 +73,7 @@ export class SweepLine {
   /**
    * Tree of segments sorted by above-below order
    */
-  private readonly _tree: RedBlackTree<Segment>;
+  private readonly _tree: ExtendedRedBlackTree<Segment>;
 
   /**
    * Mapping between ring, edges, and segments
@@ -87,9 +87,9 @@ export class SweepLine {
   public constructor(rings: LineString[]) {
     this._rings = rings;
     this._comparator = new SegmentComparator();
-    this._tree = new RedBlackTree<Segment>([], {
-      comparator: this._comparator.compare.bind(this._comparator),
-    });
+    this._tree = new ExtendedRedBlackTree<Segment>(
+      this._comparator.compare.bind(this._comparator),
+    );
   }
 
   /**
@@ -101,27 +101,26 @@ export class SweepLine {
     const segment: Segment = this.createSegment(event);
 
     this._comparator.x = event.point.x;
-    this._tree.add(segment);
-    // this._tree.print();
+    this._tree.insert(segment);
 
-    const current = this._tree.getNodeByKey(segment);
+    const current = this._tree.findNode(segment);
+
+    if (!current) {
+      throw new SFException("Segment not found");
+    }
 
     if (current) {
-      // const next = this._tree.getSuccessor(current)?.key;
-      const next = current.parent?.key;
-
-      // @ts-ignore Unsure of correct type
-      const previous = this._tree.getPredecessor(segment).key;
+      const next = this._tree.getSuccessor(current);
+      const previous = this._tree.getPredecessor(current);
 
       // Update the above and below pointers
-
-      if (next !== undefined) {
-        segment.above = next;
-        next.below = segment;
+      if (next) {
+        segment.above = next.value;
+        next.value.below = segment;
       }
-      if (previous !== undefined) {
-        segment.below = previous;
-        previous.above = segment;
+      if (previous) {
+        segment.below = previous.value;
+        previous.value.above = segment;
       }
     }
 
@@ -227,10 +226,10 @@ export class SweepLine {
    * @param segment segment
    */
   public remove(segment: Segment): void {
-    let removed = this._tree.delete(segment).length > 0;
+    let removed = this._tree.remove(segment);
     if (removed) {
       this._comparator.x = segment.leftPoint.x;
-      removed = this._tree.delete(segment).length > 0;
+      removed = this._tree.remove(segment);
     }
 
     if (removed) {

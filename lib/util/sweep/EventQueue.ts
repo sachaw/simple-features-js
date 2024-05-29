@@ -1,6 +1,6 @@
-import { sort } from "timsort";
-import { Event, EventType, LineString, SweepLine } from "../../internal.ts";
-import type { Point } from "../../internal.ts";
+import { sort } from "@dewars/timsort";
+import { Event, EventType, SweepLine } from "../../internal.ts";
+import type { LineString, Point } from "../../internal.ts";
 
 /**
  * Event queue for processing events
@@ -11,21 +11,20 @@ export class EventQueue implements Iterable<Event> {
    */
   private _events: Event[] = [];
 
-  public constructor(ring: LineString);
-  public constructor(rings: LineString[]);
+  public static createFromLineString(ring: LineString): EventQueue {
+    const eventQueue = new EventQueue();
+    eventQueue.addRing(ring, 0);
+    eventQueue.sort();
+    return eventQueue;
+  }
 
-  public constructor(...args: [ring: LineString] | [rings: LineString[]]) {
-    // Match: [ring: LineString]
-    if (args.length === 1 && args[0] instanceof LineString) {
-      this.addRing(args[0], 0);
-      this.sort();
-    } // Match: [rings: LineString[]]
-    else if (args.length === 1 && Array.isArray(args[0])) {
-      for (let i = 0; i < args[0].length; i++) {
-        this.addRing(args[0][i], i);
-      }
-      this.sort();
+  public static createFromLineStrings(rings: LineString[]): EventQueue {
+    const eventQueue = new EventQueue();
+    for (let i = 0; i < rings.length; i++) {
+      eventQueue.addRing(rings[i], i);
     }
+    eventQueue.sort();
+    return eventQueue;
   }
 
   /**

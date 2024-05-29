@@ -79,13 +79,15 @@ export class ShamosHoey {
       const ring = rings[i];
 
       // Copy the ring
-      const ringCopy: LineString = LineString.create();
-      ringCopy.points = ring.points.slice();
+      const ringCopy: LineString = LineString.createFromPoints(
+        ring.points.slice(),
+      );
       ringCopies.push(ringCopy);
 
       // Remove the last point when identical to the first
       const ringCopyPoints: Point[] = ringCopy.points;
       if (ringCopyPoints.length >= 3) {
+        // use inbuilt copy method
         const first: Point = ringCopyPoints[0];
         const last: Point = ringCopyPoints[ringCopyPoints.length - 1];
         if (first.x === last.x && first.y === last.y) {
@@ -128,7 +130,9 @@ export class ShamosHoey {
 
     // If valid polygon rings
     if (simple) {
-      const eventQueue: EventQueue = new EventQueue(ringCopies);
+      const eventQueue: EventQueue = EventQueue.createFromLineStrings(
+        ringCopies,
+      );
       const sweepLine: SweepLine = new SweepLine(ringCopies);
 
       for (const event of eventQueue) {

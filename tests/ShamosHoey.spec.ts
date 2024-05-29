@@ -1,15 +1,6 @@
 import { LineString, Point, Polygon, ShamosHoey } from "../lib/internal.ts";
 import { expect } from "@std/expect";
 
-Deno.test("debug", () => {
-  const points = [
-    Point.createFromXY(0, 0),
-    Point.createFromXY(1, 0),
-    Point.createFromXY(0.5, 1),
-  ];
-
-  expect(ShamosHoey.simplePolygonPoints(points)).toBe(true);
-});
 Deno.test("test simple", () => {
   let points = [
     Point.createFromXY(0, 0),
