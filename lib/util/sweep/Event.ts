@@ -1,5 +1,5 @@
-import type { Comparable, EventType, Point } from "../../mod.ts";
-import { SweepLine } from "../../mod.ts";
+import type { Comparable, EventType, Point } from "../../internal.ts";
+import { SweepLine } from "../../internal.ts";
 
 /**
  * Event element

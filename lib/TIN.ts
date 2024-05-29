@@ -1,5 +1,5 @@
-import { GeometryType, PolyhedralSurface } from "./mod.ts";
-import type { Polygon } from "./mod.ts";
+import { GeometryType, PolyhedralSurface } from "./internal.ts";
+import type { Polygon } from "./internal.ts";
 
 /**
  * A tetrahedron (4 triangular faces), corner at the origin and each unit

@@ -1,4 +1,4 @@
-import { LineString, Point, Polygon, ShamosHoey } from "../lib/mod.ts";
+import { LineString, Point, Polygon, ShamosHoey } from "../lib/internal.ts";
 import { expect } from "@std/expect";
 
 Deno.test("debug", () => {

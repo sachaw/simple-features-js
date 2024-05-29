@@ -3,8 +3,8 @@ import {
   GeometryType,
   Point,
   SFException,
-} from "../../mod.ts";
-import type { Geometry, GeometryFilter } from "../../mod.ts";
+} from "../../internal.ts";
+import type { Geometry, GeometryFilter } from "../../internal.ts";
 
 /**
  * Point filter for finite checks on x and y properties, optionally filter on z

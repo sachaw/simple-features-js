@@ -11,7 +11,7 @@ import {
   SFException,
   Surface,
   UnsupportedOperationException,
-} from "./mod.ts";
+} from "./internal.ts";
 
 /**
  * A collection of zero or more Geometry instances.
@@ -44,7 +44,7 @@ export class GeometryCollection<T extends Geometry = Geometry>
     hasZ?: boolean,
     hasM?: boolean,
   ): GeometryCollection {
-    return new GeometryCollection(GeometryType.Geometry, hasZ, hasM);
+    return new GeometryCollection(GeometryType.GeometryCollection, hasZ, hasM);
   }
 
   /**

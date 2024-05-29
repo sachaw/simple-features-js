@@ -1,5 +1,5 @@
-import { Geometry, GeometryType, LineString } from "./mod.ts";
-import type { Point } from "./mod.ts";
+import { Geometry, GeometryType, LineString } from "./internal.ts";
+import type { Point } from "./internal.ts";
 
 /**
  * A LineString with exactly 2 Points.

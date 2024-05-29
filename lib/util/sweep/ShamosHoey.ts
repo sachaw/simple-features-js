@@ -1,11 +1,11 @@
-import type { Point, Polygon, Segment } from "../../mod.ts";
+import type { Point, Polygon, Segment } from "../../internal.ts";
 import {
   EventQueue,
   EventType,
   GeometryUtils,
   LineString,
   SweepLine,
-} from "../../mod.ts";
+} from "../../internal.ts";
 
 /**
  * Shamos-Hoey simple polygon detection

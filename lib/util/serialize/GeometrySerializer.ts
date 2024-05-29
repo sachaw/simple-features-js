@@ -14,9 +14,9 @@ import {
   SFException,
   TIN,
   Triangle,
-} from "../../mod.ts";
+} from "../../internal.ts";
 
-import type { Geometry } from "../../mod.ts";
+import type { Geometry } from "../../internal.ts";
 
 export interface SerializedPoint {
   _geometryType: GeometryType.Point;

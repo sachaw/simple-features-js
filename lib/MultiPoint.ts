@@ -1,5 +1,5 @@
-import type { Point } from "./mod.ts";
-import { Geometry, GeometryCollection, GeometryType } from "./mod.ts";
+import type { Point } from "./internal.ts";
+import { Geometry, GeometryCollection, GeometryType } from "./internal.ts";
 
 /**
  * A restricted form of GeometryCollection where each Geometry in the collection

@@ -1,5 +1,5 @@
-import type { Curve, Polygon } from "./mod.ts";
-import { Geometry, GeometryType, MultiSurface } from "./mod.ts";
+import type { Curve, Polygon } from "./internal.ts";
+import { Geometry, GeometryType, MultiSurface } from "./internal.ts";
 
 /**
  * A restricted form of MultiSurface where each Surface in the collection must

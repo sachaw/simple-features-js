@@ -1,5 +1,5 @@
-import type { GeometryType } from "./mod.ts";
-import { Geometry } from "./mod.ts";
+import type { GeometryType } from "./internal.ts";
+import { Geometry } from "./internal.ts";
 
 /**
  * The base type for all 2-dimensional geometry types. A 2-dimensional geometry

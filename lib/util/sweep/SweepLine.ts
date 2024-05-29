@@ -1,6 +1,6 @@
 import { RedBlackTree } from "red-black-tree-typed";
-import { Segment, SFException } from "../../mod.ts";
-import type { Comparator, Event, LineString, Point } from "../../mod.ts";
+import { Segment, SFException } from "../../internal.ts";
+import type { Comparator, Event, LineString, Point } from "../../internal.ts";
 
 /**
  * Segment comparator for adding segments to the sweep line in above-below

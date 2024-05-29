@@ -7,9 +7,14 @@ import type {
   LineString,
   Polygon,
   PolyhedralSurface,
-} from "../../mod.ts";
+} from "../../internal.ts";
 
-import { GeometryType, GeometryUtils, Point, SFException } from "../../mod.ts";
+import {
+  GeometryType,
+  GeometryUtils,
+  Point,
+  SFException,
+} from "../../internal.ts";
 
 /**
  * Centroid calculations for geometries in degrees

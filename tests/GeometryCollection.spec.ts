@@ -6,8 +6,13 @@ import {
   MultiLineString,
   MultiPoint,
   MultiPolygon,
-} from "../lib/mod.ts";
-import type { CompoundCurve, LineString, Point, Polygon } from "../lib/mod.ts";
+} from "../lib/internal.ts";
+import type {
+  CompoundCurve,
+  LineString,
+  Point,
+  Polygon,
+} from "../lib/internal.ts";
 import {
   coinFlip,
   createCompoundCurve,
@@ -48,6 +53,7 @@ Deno.test("test multi point", () => {
   expect(multiPoint.isMultiSurface()).toBe(false);
 
   expect(geometryCollection.isMultiPoint()).toBe(true);
+
   expect(geometryCollection.getCollectionType()).toEqual(
     GeometryType.MultiPoint,
   );
@@ -65,11 +71,11 @@ Deno.test("test multi point", () => {
   expect(
     geometryCollection2.equals(geometryCollection.getAsGeometryCollection()),
   ).toBe(true);
-
   const extendedGeometryCollection = ExtendedGeometryCollection
     .createFromGeometryCollection(
       geometryCollection,
     );
+
   expect(extendedGeometryCollection.geometryType).toEqual(
     GeometryType.GeometryCollection,
   );

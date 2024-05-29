@@ -1,4 +1,4 @@
-import { Line, LineString, Point, Polygon, SFException } from "./mod.ts";
+import { Line, LineString, Point, Polygon, SFException } from "./internal.ts";
 
 /**
  * Geometry envelope

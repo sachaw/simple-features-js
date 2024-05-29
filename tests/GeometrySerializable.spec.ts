@@ -1,7 +1,7 @@
 import { expect } from "@std/expect";
 import { assert } from "@std/assert";
-import type { Geometry } from "../lib/mod.ts";
-import { GeometrySerializer } from "../lib/mod.ts";
+import type { Geometry } from "../lib/internal.ts";
+import { GeometrySerializer } from "../lib/internal.ts";
 import {
   compareGeometries,
   createCompoundCurve,

@@ -1,5 +1,5 @@
-import type { LineString } from "./mod.ts";
-import { GeometryType, Polygon } from "./mod.ts";
+import type { LineString } from "./internal.ts";
+import { GeometryType, Polygon } from "./internal.ts";
 
 /**
  * Triangle

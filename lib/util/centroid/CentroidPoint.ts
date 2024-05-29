@@ -1,6 +1,10 @@
-import type { Geometry, GeometryCollection, MultiPoint } from "../../mod.ts";
+import type {
+  Geometry,
+  GeometryCollection,
+  MultiPoint,
+} from "../../internal.ts";
 
-import { GeometryType, Point, SFException } from "../../mod.ts";
+import { GeometryType, Point, SFException } from "../../internal.ts";
 
 /**
  * Calculate the centroid from point based geometries. Implementation based on

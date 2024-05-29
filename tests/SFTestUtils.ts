@@ -8,7 +8,7 @@ import type {
   PolyhedralSurface,
   TIN,
   Triangle,
-} from "../lib/mod.ts";
+} from "../lib/internal.ts";
 import {
   CompoundCurve,
   CurvePolygon,
@@ -21,7 +21,7 @@ import {
   Point,
   Polygon,
   SFException,
-} from "../lib/mod.ts";
+} from "../lib/internal.ts";
 
 export const compareEnvelopes = (
   expected: GeometryEnvelope,

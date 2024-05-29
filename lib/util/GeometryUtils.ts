@@ -1,4 +1,10 @@
-import type { Curve, Geometry, GeometryUnion, TIN, Triangle } from "../mod.ts";
+import type {
+  Curve,
+  Geometry,
+  GeometryUnion,
+  TIN,
+  Triangle,
+} from "../internal.ts";
 import {
   CentroidCurve,
   CentroidPoint,
@@ -20,7 +26,7 @@ import {
   Polygon,
   PolyhedralSurface,
   SFException,
-} from "../mod.ts";
+} from "../internal.ts";
 
 export type GeometryHierarchy = Map<
   GeometryType,

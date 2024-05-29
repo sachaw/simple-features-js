@@ -1,5 +1,5 @@
-import type { Point } from "./mod.ts";
-import { Geometry, GeometryType, LineString } from "./mod.ts";
+import type { Point } from "./internal.ts";
+import { Geometry, GeometryType, LineString } from "./internal.ts";
 
 /**
  * Circular String, Curve sub type

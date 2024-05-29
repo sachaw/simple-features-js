@@ -1,4 +1,4 @@
-import type { Point } from "../../mod.ts";
+import type { Point } from "../../internal.ts";
 
 /**
  * Line segment of an edge between two points

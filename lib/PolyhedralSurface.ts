@@ -1,10 +1,10 @@
-import type { Polygon } from "./mod.ts";
+import type { Polygon } from "./internal.ts";
 import {
   Geometry,
   GeometryType,
   Surface,
   UnsupportedOperationException,
-} from "./mod.ts";
+} from "./internal.ts";
 
 /**
  * Contiguous collection of polygons which share common boundary segments.

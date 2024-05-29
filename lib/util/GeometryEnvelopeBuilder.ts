@@ -15,8 +15,8 @@ import {
   PolyhedralSurface,
   TIN,
   Triangle,
-} from "../mod.ts";
-import type { Curve, Geometry } from "../mod.ts";
+} from "../internal.ts";
+import type { Curve, Geometry } from "../internal.ts";
 
 /**
  * Builds an envelope from a Geometry

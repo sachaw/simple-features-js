@@ -12,7 +12,7 @@ import type { Polygon } from "./Polygon.ts";
 import type { PolyhedralSurface } from "./PolyhedralSurface.ts";
 import type { TIN } from "./TIN.ts";
 import type { Triangle } from "./Triangle.ts";
-import type { CircularString } from "./mod.ts";
+import type { CircularString } from "./internal.ts";
 
 // Interfaces
 export * from "./util/Comparator.ts";

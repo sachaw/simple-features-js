@@ -1,4 +1,4 @@
-import type { Geometry, GeometryType } from "../../mod.ts";
+import type { Geometry, GeometryType } from "../../internal.ts";
 
 /**
  * Geometry Filter to filter included geometries and modify them during

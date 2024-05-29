@@ -1,5 +1,5 @@
-import type { GeometryEnvelope, GeometryType, Point } from "./mod.ts";
-import { GeometryEnvelopeBuilder, GeometryUtils } from "./mod.ts";
+import type { GeometryEnvelope, GeometryType, Point } from "./internal.ts";
+import { GeometryEnvelopeBuilder, GeometryUtils } from "./internal.ts";
 
 /**
  * The root of the geometry type hierarchy

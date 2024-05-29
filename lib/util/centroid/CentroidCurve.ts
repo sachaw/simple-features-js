@@ -4,9 +4,14 @@ import type {
   GeometryCollection,
   LineString,
   MultiLineString,
-} from "../../mod.ts";
+} from "../../internal.ts";
 
-import { GeometryType, GeometryUtils, Point, SFException } from "../../mod.ts";
+import {
+  GeometryType,
+  GeometryUtils,
+  Point,
+  SFException,
+} from "../../internal.ts";
 
 /**
  * Calculate the centroid from curve based geometries. Implementation based on

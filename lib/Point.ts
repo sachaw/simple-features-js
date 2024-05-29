@@ -1,4 +1,4 @@
-import { Geometry, GeometryType } from "./mod.ts";
+import { Geometry, GeometryType } from "./internal.ts";
 
 /**
  * A single location in space. Each point has an X and Y coordinate. A point MAY

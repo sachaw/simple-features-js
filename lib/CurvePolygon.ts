@@ -1,10 +1,10 @@
-import { Curve, LineString, SFException } from "./mod.ts";
+import { Curve, LineString, SFException } from "./internal.ts";
 import {
   Geometry,
   GeometryType,
   Surface,
   UnsupportedOperationException,
-} from "./mod.ts";
+} from "./internal.ts";
 
 /**
  * A planar surface defined by an exterior ring and zero or more interior ring.

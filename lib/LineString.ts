@@ -1,11 +1,11 @@
-import type { Point } from "./mod.ts";
+import type { Point } from "./internal.ts";
 import {
   Curve,
   Geometry,
   GeometryType,
   SFException,
   ShamosHoey,
-} from "./mod.ts";
+} from "./internal.ts";
 
 /**
  * A Curve that connects two or more points in space.

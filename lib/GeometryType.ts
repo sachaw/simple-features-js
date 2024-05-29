@@ -1,4 +1,4 @@
-import { SFException } from "./mod.ts";
+import { SFException } from "./internal.ts";
 
 /**
  * Geometry Type enumeration

@@ -1,5 +1,5 @@
-import type { Point } from "./mod.ts";
-import { Geometry, GeometryType, LineString, SFException } from "./mod.ts";
+import type { Point } from "./internal.ts";
+import { Geometry, GeometryType, LineString, SFException } from "./internal.ts";
 
 /**
  * A LineString that is both closed and simple.

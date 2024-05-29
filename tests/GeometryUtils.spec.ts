@@ -1,4 +1,8 @@
-import type { Geometry, GeometryHierarchy, GeometryUnion } from "../lib/mod.ts";
+import type {
+  Geometry,
+  GeometryHierarchy,
+  GeometryUnion,
+} from "../lib/internal.ts";
 import {
   GeometryCollection,
   GeometryConstants,
@@ -9,7 +13,7 @@ import {
   MultiPolygon,
   Point,
   Polygon,
-} from "../lib/mod.ts";
+} from "../lib/internal.ts";
 import {
   coinFlip,
   createLineString,

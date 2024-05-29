@@ -8,9 +8,9 @@ import type {
   MultiPolygon,
   Polygon,
   PolyhedralSurface,
-} from "../../mod.ts";
+} from "../../internal.ts";
 
-import { GeometryType, Point, SFException } from "../../mod.ts";
+import { GeometryType, Point, SFException } from "../../internal.ts";
 
 /**
  * Calculate the centroid from surface based geometries. Implementation based on

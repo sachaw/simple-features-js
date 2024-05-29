@@ -1,5 +1,5 @@
-import type { GeometryType, Point } from "./mod.ts";
-import { Geometry } from "./mod.ts";
+import type { GeometryType, Point } from "./internal.ts";
+import { Geometry } from "./internal.ts";
 
 /**
  * The base type for all 1-dimensional geometry types. A 1-dimensional geometry

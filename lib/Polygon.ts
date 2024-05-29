@@ -1,5 +1,5 @@
-import type { LineString } from "./mod.ts";
-import { CurvePolygon, GeometryType, ShamosHoey } from "./mod.ts";
+import type { LineString } from "./internal.ts";
+import { CurvePolygon, GeometryType, ShamosHoey } from "./internal.ts";
 
 /**
  * A restricted form of CurvePolygon where each ring is defined as a simple,

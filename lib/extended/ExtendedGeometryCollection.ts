@@ -1,5 +1,5 @@
-import type { Geometry } from "../mod.ts";
-import { GeometryCollection, GeometryType, SFException } from "../mod.ts";
+import type { Geometry } from "../internal.ts";
+import { GeometryCollection, GeometryType, SFException } from "../internal.ts";
 
 /**
  * Extended Geometry Collection providing abstract geometry collection type
@@ -43,9 +43,14 @@ export class ExtendedGeometryCollection<T extends Geometry = Geometry>
       geometryCollection.hasZ,
       geometryCollection.hasM,
     );
+
+    // TODO: This shouldnt be required to be set
+    extendedGeometryCollection.geometryType = GeometryType.GeometryCollection;
+
     for (const geometry of geometryCollection.geometries) {
       extendedGeometryCollection.addGeometry(geometry);
     }
+    extendedGeometryCollection.updateGeometryType();
     return extendedGeometryCollection;
   }
 
@@ -107,6 +112,8 @@ export class ExtendedGeometryCollection<T extends Geometry = Geometry>
     for (const geometry of this.geometries) {
       extendedGeometryCollectionCopy.addGeometry(geometry.copy());
     }
+    extendedGeometryCollectionCopy._editableGeometryType =
+      this._editableGeometryType;
     return extendedGeometryCollectionCopy;
   }
 

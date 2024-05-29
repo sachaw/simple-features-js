@@ -1,5 +1,5 @@
-import type { GeometryType, Surface } from "./mod.ts";
-import { GeometryCollection } from "./mod.ts";
+import type { GeometryType, Surface } from "./internal.ts";
+import { GeometryCollection } from "./internal.ts";
 
 /**
  * A restricted form of GeometryCollection where each Geometry in the collection

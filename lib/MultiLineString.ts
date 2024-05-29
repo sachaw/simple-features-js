@@ -1,5 +1,5 @@
-import { GeometryCollection, GeometryType, MultiCurve } from "./mod.ts";
-import type { LineString } from "./mod.ts";
+import { GeometryCollection, GeometryType, MultiCurve } from "./internal.ts";
+import type { LineString } from "./internal.ts";
 
 /**
  * A restricted form of MultiCurve where each Curve in the collection must be of

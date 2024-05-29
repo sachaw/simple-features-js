@@ -1,4 +1,4 @@
-import type { Point } from "./mod.ts";
+import type { Point } from "./internal.ts";
 import {
   Curve,
   Geometry,
@@ -6,7 +6,7 @@ import {
   type LineString,
   SFException,
   ShamosHoey,
-} from "./mod.ts";
+} from "./internal.ts";
 
 /**
  * Compound Curve, Curve sub type

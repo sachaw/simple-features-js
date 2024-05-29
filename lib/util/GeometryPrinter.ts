@@ -14,8 +14,8 @@ import type {
   PolyhedralSurface,
   TIN,
   Triangle,
-} from "../mod.ts";
-import { GeometryType } from "../mod.ts";
+} from "../internal.ts";
+import { GeometryType } from "../internal.ts";
 
 /**
  * String representation of a Geometry

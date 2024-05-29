@@ -1,6 +1,6 @@
 import { sort } from "timsort";
-import { Event, EventType, LineString, SweepLine } from "../../mod.ts";
-import type { Point } from "../../mod.ts";
+import { Event, EventType, LineString, SweepLine } from "../../internal.ts";
+import type { Point } from "../../internal.ts";
 
 /**
  * Event queue for processing events
