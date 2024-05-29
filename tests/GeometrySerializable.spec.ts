@@ -1,6 +1,5 @@
-import type { Assert } from "@japa/assert";
-import type { Expect } from "@japa/expect/types";
-import { test } from "@japa/runner";
+import { expect } from "@std/expect";
+import { assert } from "@std/assert";
 import type { Geometry } from "../lib/mod.ts";
 import { GeometrySerializer } from "../lib/mod.ts";
 import {
@@ -22,76 +21,74 @@ function testSerializable(geometry: Geometry, expect: Expect, assert: Assert) {
   compareGeometries(geometry, deserializedGeometry, expect, assert);
 }
 
-test.group("GeometrySerializableTest", () => {
-  test("test polygon", ({ expect, assert }) => {
-    testSerializable(
-      createPolygon(Math.random() < 0.5, Math.random() < 0.5),
-      expect,
-      assert,
-    );
-  });
+Deno.test("test polygon", () => {
+  testSerializable(
+    createPolygon(Math.random() < 0.5, Math.random() < 0.5),
+    expect,
+    assert,
+  );
+});
 
-  test("test line string", ({ expect, assert }) => {
-    testSerializable(
-      createLineString(Math.random() < 0.5, Math.random() < 0.5),
-      expect,
-      assert,
-    );
-  });
+Deno.test("test line string", () => {
+  testSerializable(
+    createLineString(Math.random() < 0.5, Math.random() < 0.5),
+    expect,
+    assert,
+  );
+});
 
-  test("test point", ({ expect, assert }) => {
-    testSerializable(
-      createPoint(Math.random() < 0.5, Math.random() < 0.5),
-      expect,
-      assert,
-    );
-  });
+Deno.test("test point", () => {
+  testSerializable(
+    createPoint(Math.random() < 0.5, Math.random() < 0.5),
+    expect,
+    assert,
+  );
+});
 
-  test("test geometry collection", ({ expect, assert }) => {
-    testSerializable(
-      createGeometryCollection(Math.random() < 0.5, Math.random() < 0.5),
-      expect,
-      assert,
-    );
-  });
+Deno.test("test geometry collection", () => {
+  testSerializable(
+    createGeometryCollection(Math.random() < 0.5, Math.random() < 0.5),
+    expect,
+    assert,
+  );
+});
 
-  test("test multi polygon", ({ expect, assert }) => {
-    testSerializable(
-      createMultiPolygon(Math.random() < 0.5, Math.random() < 0.5),
-      expect,
-      assert,
-    );
-  });
+Deno.test("test multi polygon", () => {
+  testSerializable(
+    createMultiPolygon(Math.random() < 0.5, Math.random() < 0.5),
+    expect,
+    assert,
+  );
+});
 
-  test("test multi line string", ({ expect, assert }) => {
-    testSerializable(
-      createMultiLineString(Math.random() < 0.5, Math.random() < 0.5),
-      expect,
-      assert,
-    );
-  });
+Deno.test("test multi line string", () => {
+  testSerializable(
+    createMultiLineString(Math.random() < 0.5, Math.random() < 0.5),
+    expect,
+    assert,
+  );
+});
 
-  test("test multi point", ({ expect, assert }) => {
-    testSerializable(
-      createMultiPoint(Math.random() < 0.5, Math.random() < 0.5),
-      expect,
-      assert,
-    );
-  });
+Deno.test("test multi point", () => {
+  testSerializable(
+    createMultiPoint(Math.random() < 0.5, Math.random() < 0.5),
+    expect,
+    assert,
+  );
+});
 
-  test("test curve polygon", ({ expect, assert }) => {
-    testSerializable(
-      createCurvePolygon(Math.random() < 0.5, Math.random() < 0.5),
-      expect,
-      assert,
-    );
-  });
+Deno.test("test curve polygon", () => {
+  testSerializable(
+    createCurvePolygon(Math.random() < 0.5, Math.random() < 0.5),
+    expect,
+    assert,
+  );
+});
 
-  test("test compound curve", ({ expect, assert }) => {
-    testSerializable(
-      createCompoundCurve(Math.random() < 0.5, Math.random() < 0.5),
-      expect,
-      assert,
-    );
-  });
+Deno.test("test compound curve", () => {
+  testSerializable(
+    createCompoundCurve(Math.random() < 0.5, Math.random() < 0.5),
+    expect,
+    assert,
+  );
 });
