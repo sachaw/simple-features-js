@@ -85,7 +85,7 @@ export class GeometryEnvelopeBuilder {
       geometry instanceof MultiSurface
     ) {
       GeometryEnvelopeBuilder.updateHasZandM(envelope, geometry);
-      const geometries = (geometry as GeometryCollection<Geometry>).geometries;
+      const geometries = (geometry as GeometryCollection).geometries;
       for (const subGeometry of geometries) {
         GeometryEnvelopeBuilder.buildEnvelopeWithEnvelope(
           subGeometry,
@@ -258,7 +258,7 @@ export class GeometryEnvelopeBuilder {
    */
   private static addCurvePolygon(
     envelope: GeometryEnvelope,
-    curvePolygon: CurvePolygon<Curve>,
+    curvePolygon: CurvePolygon,
   ): void {
     GeometryEnvelopeBuilder.updateHasZandM(envelope, curvePolygon);
     for (const ring of curvePolygon.rings) {

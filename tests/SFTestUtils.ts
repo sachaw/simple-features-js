@@ -61,59 +61,69 @@ export const compareGeometries = (
 
     switch (expected.geometryType) {
       case GeometryType.Geometry: {
-        assert.fail(
-          `Unexpected Geometry Type of ${
-            GeometryType.nameFromType(
-              expected.geometryType,
-            )
-          } which is abstract`,
-        );
+        assert(`Unexpected Geometry Type of ${
+          GeometryType.nameFromType(
+            expected.geometryType,
+          )
+        } which is abstract`);
         break;
       }
       case GeometryType.Point: {
-        comparePoint(actual, expected);
+        comparePoint(actual as Point, expected as Point);
         break;
       }
       case GeometryType.LineString: {
-        compareLineString(expected, actual);
+        compareLineString(expected as LineString, actual as LineString);
         break;
       }
       case GeometryType.Polygon: {
-        comparePolygon(expected, actual);
+        comparePolygon(expected as Polygon, actual as Polygon);
         break;
       }
       case GeometryType.MultiPoint: {
-        compareMultiPoint(expected, actual);
+        compareMultiPoint(expected as MultiPoint, actual as MultiPoint);
         break;
       }
       case GeometryType.MultiLineString: {
-        compareMultiLineString(expected, actual);
+        compareMultiLineString(
+          expected as MultiLineString,
+          actual as MultiLineString,
+        );
         break;
       }
       case GeometryType.MultiPolygon: {
-        compareMultiPolygon(expected, actual);
+        compareMultiPolygon(expected as MultiPolygon, actual as MultiPolygon);
         break;
       }
       case GeometryType.GeometryCollection:
       case GeometryType.MultiCurve:
       case GeometryType.MultiSurface: {
-        compareGeometryCollection(expected, actual);
+        compareGeometryCollection(
+          expected as GeometryCollection,
+          actual as GeometryCollection,
+        );
         break;
       }
       case GeometryType.CircularString: {
-        compareCircularString(expected, actual);
+        compareCircularString(
+          expected as CircularString,
+          actual as CircularString,
+        );
         break;
       }
       case GeometryType.CompoundCurve: {
-        compareCompoundCurve(expected, actual);
+        compareCompoundCurve(
+          expected as CompoundCurve,
+          actual as CompoundCurve,
+        );
         break;
       }
       case GeometryType.CurvePolygon: {
-        compareCurvePolygon(expected, actual);
+        compareCurvePolygon(expected as CurvePolygon, actual as CurvePolygon);
         break;
       }
       case GeometryType.Curve: {
-        assert.fail(
+        assert(
           `Unexpected Geometry Type of ${
             GeometryType.nameFromType(
               expected.geometryType,
@@ -123,7 +133,7 @@ export const compareGeometries = (
         break;
       }
       case GeometryType.Surface: {
-        assert.fail(
+        assert(
           `Unexpected Geometry Type of ${
             GeometryType.nameFromType(
               expected.geometryType,
@@ -133,15 +143,18 @@ export const compareGeometries = (
         break;
       }
       case GeometryType.PolyhedralSurface: {
-        comparePolyhedralSurface(expected, actual);
+        comparePolyhedralSurface(
+          expected as PolyhedralSurface,
+          actual as PolyhedralSurface,
+        );
         break;
       }
       case GeometryType.Tin: {
-        compareTIN(expected, actual);
+        compareTIN(expected as TIN, actual as TIN);
         break;
       }
       case GeometryType.Triangle: {
-        compareTriangle(expected, actual);
+        compareTriangle(expected as Triangle, actual as Triangle);
         break;
       }
       default:
@@ -274,8 +287,8 @@ export const compareMultiPolygon = (
  */
 
 export const compareGeometryCollection = (
-  expected: GeometryCollection<Geometry>,
-  actual: GeometryCollection<Geometry>,
+  expected: GeometryCollection,
+  actual: GeometryCollection,
 ) => {
   compareBaseGeometryAttributes(expected, actual);
   expect(expected.numGeometries()).toEqual(actual.numGeometries());
@@ -328,8 +341,8 @@ export const compareCompoundCurve = (
  * @param actual
  */
 export const compareCurvePolygon = (
-  expected: CurvePolygon<Curve>,
-  actual: CurvePolygon<Curve>,
+  expected: CurvePolygon,
+  actual: CurvePolygon,
 ) => {
   compareBaseGeometryAttributes(expected, actual);
   expect(expected.numRings()).toEqual(actual.numRings());

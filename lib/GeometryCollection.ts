@@ -17,7 +17,8 @@ import {
  * A collection of zero or more Geometry instances.
  * @param <T> geometry type
  */
-export class GeometryCollection<T extends Geometry> extends Geometry {
+export class GeometryCollection<T extends Geometry = Geometry>
+  extends Geometry {
   /**
    * List of geometries
    */
@@ -42,7 +43,7 @@ export class GeometryCollection<T extends Geometry> extends Geometry {
   public static create(
     hasZ?: boolean,
     hasM?: boolean,
-  ): GeometryCollection<Geometry> {
+  ): GeometryCollection {
     return new GeometryCollection(GeometryType.Geometry, hasZ, hasM);
   }
 
@@ -53,7 +54,7 @@ export class GeometryCollection<T extends Geometry> extends Geometry {
    */
   public static createFromGeometries(
     geometries: Geometry[],
-  ): GeometryCollection<Geometry> {
+  ): GeometryCollection {
     const hasZ = Geometry.hasZ(geometries);
     const hasM = Geometry.hasM(geometries);
     const geometryCollection = GeometryCollection.create(hasZ, hasM);
@@ -68,7 +69,7 @@ export class GeometryCollection<T extends Geometry> extends Geometry {
    */
   public static createFromGeometry(
     geometry: Geometry,
-  ): GeometryCollection<Geometry> {
+  ): GeometryCollection {
     const hasZ = geometry.hasZ;
     const hasM = geometry.hasM;
     const geometryCollection = GeometryCollection.create(hasZ, hasM);
@@ -284,8 +285,8 @@ export class GeometryCollection<T extends Geometry> extends Geometry {
    * Get as a Multi Curve, a {@link Curve} typed Geometry Collection
    * @return multi curve
    */
-  public getAsMultiCurve(): GeometryCollection<T | Geometry> {
-    let multiCurve: GeometryCollection<T | Geometry>;
+  public getAsMultiCurve(): GeometryCollection {
+    let multiCurve: GeometryCollection;
     if (this instanceof MultiLineString) {
       multiCurve = GeometryCollection.createFromGeometries(this.geometries);
     } else {
@@ -315,8 +316,8 @@ export class GeometryCollection<T extends Geometry> extends Geometry {
    * Get as a Multi Surface, a {@link Surface} typed Geometry Collection
    * @return multi surface
    */
-  public getAsMultiSurface(): GeometryCollection<T | Geometry> {
-    let multiSurface: GeometryCollection<T | Geometry>;
+  public getAsMultiSurface(): GeometryCollection {
+    let multiSurface: GeometryCollection;
     if (this instanceof MultiPolygon) {
       multiSurface = GeometryCollection.createFromGeometries(
         this.geometries,
@@ -334,7 +335,7 @@ export class GeometryCollection<T extends Geometry> extends Geometry {
    * Get as a top level Geometry Collection
    * @return geometry collection
    */
-  public getAsGeometryCollection(): GeometryCollection<T | Geometry> {
+  public getAsGeometryCollection(): GeometryCollection {
     return GeometryCollection.createFromGeometries(this.geometries);
   }
 

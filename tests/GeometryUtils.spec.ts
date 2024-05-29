@@ -674,7 +674,6 @@ Deno.test("test hierarchy", () => {
     testChildHierarchy(
       geometryType,
       GeometryUtils.childHierarchy(geometryType),
-      expect,
     );
   }
 });

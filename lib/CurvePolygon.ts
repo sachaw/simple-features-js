@@ -11,7 +11,7 @@ import {
  * Each ring is defined by a Curve instance.
  * @param <T> curve type
  */
-export class CurvePolygon<T extends Curve> extends Surface {
+export class CurvePolygon<T extends Curve = Curve> extends Surface {
   /**
    * List of rings
    */
@@ -35,7 +35,7 @@ export class CurvePolygon<T extends Curve> extends Surface {
   public static create(
     hasZ?: boolean,
     hasM?: boolean,
-  ): CurvePolygon<Curve> {
+  ): CurvePolygon {
     return new CurvePolygon(GeometryType.CurvePolygon, hasZ, hasM);
   }
 
@@ -46,7 +46,7 @@ export class CurvePolygon<T extends Curve> extends Surface {
    */
   public static createFromRings(
     rings: LineString[],
-  ): CurvePolygon<Curve> {
+  ): CurvePolygon {
     const hasZ = Geometry.hasZ(rings);
     const hasM = Geometry.hasM(rings);
     const curvePolygon = CurvePolygon.create(hasZ, hasM);
@@ -61,7 +61,7 @@ export class CurvePolygon<T extends Curve> extends Surface {
    */
   public static createFromRing(
     ring: LineString,
-  ): CurvePolygon<Curve> {
+  ): CurvePolygon {
     const hasZ = ring.hasZ;
     const hasM = ring.hasM;
     const curvePolygon = CurvePolygon.create(hasZ, hasM);

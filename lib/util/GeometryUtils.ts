@@ -74,7 +74,7 @@ export class GeometryUtils {
       case GeometryType.MultiCurve:
       case GeometryType.MultiSurface: {
         for (
-          const subGeometry of (geometry as GeometryCollection<Geometry>)
+          const subGeometry of (geometry as GeometryCollection)
             .geometries
         ) {
           dimension = Math.max(
@@ -384,7 +384,7 @@ export class GeometryUtils {
         break;
       }
       case GeometryType.CurvePolygon: {
-        const curvePolygon = geometry as CurvePolygon<Curve>;
+        const curvePolygon = geometry as CurvePolygon;
         GeometryUtils.minimizeCurvePolygon(curvePolygon, maxX);
         break;
       }
@@ -406,7 +406,7 @@ export class GeometryUtils {
       case GeometryType.GeometryCollection:
       case GeometryType.MultiCurve:
       case GeometryType.MultiSurface: {
-        const geomCollection = geometry as GeometryCollection<Geometry>;
+        const geomCollection = geometry as GeometryCollection;
         for (const subGeometry of geomCollection.geometries) {
           GeometryUtils.minimizeGeometry(subGeometry, maxX);
         }
@@ -507,7 +507,7 @@ export class GeometryUtils {
    * @param maxX max positive x value in the geometry projection
    */
   private static minimizeCurvePolygon(
-    curvePolygon: CurvePolygon<Curve>,
+    curvePolygon: CurvePolygon,
     maxX: number,
   ): void {
     for (const ring of curvePolygon.rings) {
@@ -644,7 +644,7 @@ export class GeometryUtils {
       }
       case GeometryType.CurvePolygon: {
         GeometryUtils.normalizeCurvePolygon(
-          geometry as CurvePolygon<Curve>,
+          geometry as CurvePolygon,
           maxX,
         );
         break;
@@ -668,7 +668,7 @@ export class GeometryUtils {
       case GeometryType.MultiCurve:
       case GeometryType.MultiSurface: {
         for (
-          const subGeometry of (geometry as GeometryCollection<Geometry>)
+          const subGeometry of (geometry as GeometryCollection)
             .geometries
         ) {
           GeometryUtils.normalizeGeometry(subGeometry, maxX);
@@ -784,7 +784,7 @@ export class GeometryUtils {
    * @param maxX max positive x value in the geometry projection
    */
   private static normalizeCurvePolygon(
-    curvePolygon: CurvePolygon<Curve>,
+    curvePolygon: CurvePolygon,
     maxX: number,
   ): void {
     for (const ring of curvePolygon.rings) {
@@ -1528,7 +1528,7 @@ export class GeometryUtils {
         break;
       }
       case GeometryType.CurvePolygon: {
-        const curvePolygon = geometry as CurvePolygon<Curve>;
+        const curvePolygon = geometry as CurvePolygon;
         meters = GeometryUtils.degreesToMetersCurvePolygon(curvePolygon);
         break;
       }
@@ -1552,7 +1552,7 @@ export class GeometryUtils {
       case GeometryType.MultiCurve:
       case GeometryType.MultiSurface: {
         const metersCollection = GeometryCollection.create();
-        const geomCollection = geometry as GeometryCollection<Geometry>;
+        const geomCollection = geometry as GeometryCollection;
         for (const subGeometry of geomCollection.geometries) {
           metersCollection.addGeometry(
             GeometryUtils.degreesToMeters(subGeometry),
@@ -1771,8 +1771,8 @@ export class GeometryUtils {
    * @since 1.1.1
    */
   public static degreesToMetersCurvePolygon(
-    curvePolygon: CurvePolygon<Curve>,
-  ): CurvePolygon<Curve> {
+    curvePolygon: CurvePolygon,
+  ): CurvePolygon {
     const meters = CurvePolygon.create(curvePolygon.hasZ, curvePolygon.hasM);
     for (const ring of curvePolygon.rings) {
       meters.addRing(GeometryUtils.degreesToMeters(ring) as Curve);
@@ -1858,7 +1858,7 @@ export class GeometryUtils {
         break;
       }
       case GeometryType.CurvePolygon: {
-        const curvePolygon = geometry as CurvePolygon<Curve>;
+        const curvePolygon = geometry as CurvePolygon;
         degrees = GeometryUtils.metersToDegreesCurvePolygon(curvePolygon);
         break;
       }
@@ -1882,7 +1882,7 @@ export class GeometryUtils {
       case GeometryType.MultiCurve:
       case GeometryType.MultiSurface: {
         const degreesCollection = GeometryCollection.create();
-        const geomCollection = geometry as GeometryCollection<Geometry>;
+        const geomCollection = geometry as GeometryCollection;
         for (const subGeometry of geomCollection.geometries) {
           degreesCollection.addGeometry(
             GeometryUtils.metersToDegrees(subGeometry),
@@ -2099,8 +2099,8 @@ export class GeometryUtils {
    * @since 2.2.0
    */
   public static metersToDegreesCurvePolygon(
-    curvePolygon: CurvePolygon<Curve>,
-  ): CurvePolygon<Curve> {
+    curvePolygon: CurvePolygon,
+  ): CurvePolygon {
     const degrees = CurvePolygon.create(curvePolygon.hasZ, curvePolygon.hasM);
     for (const ring of curvePolygon.rings) {
       degrees.addRing(GeometryUtils.metersToDegrees(ring) as Curve);
@@ -2271,7 +2271,7 @@ export class GeometryUtils {
           break;
         }
         case GeometryType.CurvePolygon: {
-          const curvePolygon = geometry as CurvePolygon<Curve>;
+          const curvePolygon = geometry as CurvePolygon;
           crop = GeometryUtils.cropCurvePolygon(curvePolygon, envelope);
           break;
         }
@@ -2294,7 +2294,7 @@ export class GeometryUtils {
         case GeometryType.MultiCurve:
         case GeometryType.MultiSurface: {
           const cropCollection = GeometryCollection.create();
-          const geomCollection = geometry as GeometryCollection<Geometry>;
+          const geomCollection = geometry as GeometryCollection;
           for (const subGeometry of geomCollection.geometries) {
             const subCrop = GeometryUtils.crop(subGeometry, envelope);
             if (subCrop) {
@@ -2738,10 +2738,10 @@ export class GeometryUtils {
    * @since 1.1.1
    */
   public static cropCurvePolygon(
-    curvePolygon: CurvePolygon<Curve>,
+    curvePolygon: CurvePolygon,
     envelope: GeometryEnvelope,
-  ): CurvePolygon<Curve> | undefined {
-    let crop: CurvePolygon<Curve> | undefined;
+  ): CurvePolygon | undefined {
+    let crop: CurvePolygon | undefined;
     const cropRings: Curve[] = [];
     for (const ring of curvePolygon.rings) {
       const cropRing = GeometryUtils.crop(ring, envelope);
@@ -2999,7 +2999,7 @@ export class GeometryUtils {
         break;
       }
       case GeometryType.CurvePolygon: {
-        const curvePolygon = geometry as CurvePolygon<Curve>;
+        const curvePolygon = geometry as CurvePolygon;
         GeometryUtils.boundCurvePolygon(curvePolygon, envelope);
         break;
       }
@@ -3021,7 +3021,7 @@ export class GeometryUtils {
       case GeometryType.GeometryCollection:
       case GeometryType.MultiCurve:
       case GeometryType.MultiSurface: {
-        const geomCollection = geometry as GeometryCollection<Geometry>;
+        const geomCollection = geometry as GeometryCollection;
         for (const subGeometry of geomCollection.geometries) {
           GeometryUtils.bound(subGeometry, envelope);
         }
@@ -3161,7 +3161,7 @@ export class GeometryUtils {
    * @since 1.1.1
    */
   private static boundCurvePolygon(
-    curvePolygon: CurvePolygon<Curve>,
+    curvePolygon: CurvePolygon,
     envelope: GeometryEnvelope,
   ): void {
     for (const ring of curvePolygon.rings) {

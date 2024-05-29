@@ -7,7 +7,7 @@ import { GeometryCollection, GeometryType, SFException } from "../mod.ts";
  *
  * @param <T> geometry type
  */
-export class ExtendedGeometryCollection<T extends Geometry>
+export class ExtendedGeometryCollection<T extends Geometry = Geometry>
   extends GeometryCollection<T> {
   /**
    * Extended geometry collection geometry type
@@ -28,7 +28,7 @@ export class ExtendedGeometryCollection<T extends Geometry>
   public static create(
     hasZ?: boolean,
     hasM?: boolean,
-  ): ExtendedGeometryCollection<Geometry> {
+  ): ExtendedGeometryCollection {
     return new ExtendedGeometryCollection(
       GeometryType.GeometryCollection,
       hasZ,
@@ -37,8 +37,8 @@ export class ExtendedGeometryCollection<T extends Geometry>
   }
 
   public static createFromGeometryCollection(
-    geometryCollection: GeometryCollection<Geometry>,
-  ): ExtendedGeometryCollection<Geometry> {
+    geometryCollection: GeometryCollection,
+  ): ExtendedGeometryCollection {
     const extendedGeometryCollection = ExtendedGeometryCollection.create(
       geometryCollection.hasZ,
       geometryCollection.hasM,
@@ -99,7 +99,7 @@ export class ExtendedGeometryCollection<T extends Geometry>
   /**
    * {@inheritDoc}
    */
-  public copy(): ExtendedGeometryCollection<T | Geometry> {
+  public copy(): ExtendedGeometryCollection {
     const extendedGeometryCollectionCopy = ExtendedGeometryCollection.create(
       this.hasZ,
       this.hasM,

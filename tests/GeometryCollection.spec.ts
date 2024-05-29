@@ -7,7 +7,7 @@ import {
   MultiPoint,
   MultiPolygon,
 } from "../lib/mod.ts";
-import type { CompoundCurve, LineString } from "../lib/mod.ts";
+import type { CompoundCurve, LineString, Point, Polygon } from "../lib/mod.ts";
 import {
   coinFlip,
   createCompoundCurve,
@@ -33,7 +33,9 @@ Deno.test("test multi point", () => {
   expect(multiPoint.numGeometries()).toBe(geometryCollection.numGeometries());
   for (let i = 0; i < multiPoint.numGeometries(); i++) {
     expect(
-      multiPoint.getGeometry(i).equals(geometryCollection.getGeometry(i)),
+      multiPoint.getGeometry(i).equals(
+        geometryCollection.getGeometry(i) as Point,
+      ),
     ).toBe(true);
   }
 
@@ -108,7 +110,7 @@ Deno.test("test multi line string", () => {
     expect(
       multiLineString
         .getGeometry(i)
-        .equals(geometryCollection.getGeometry(i)),
+        .equals(geometryCollection.getGeometry(i) as LineString),
     ).toBe(true);
   }
 
@@ -146,7 +148,9 @@ Deno.test("test multi line string", () => {
   const multiCurve = geometryCollection.getAsMultiCurve();
   for (let i = 0; i < multiLineString.numGeometries(); i++) {
     expect(
-      multiLineString.getGeometry(i).equals(multiCurve.getGeometry(i)),
+      multiLineString.getGeometry(i).equals(
+        multiCurve.getGeometry(i) as LineString,
+      ),
     ).toBe(true);
   }
   const multiCurve2 = multiLineString.getAsMultiCurve();
@@ -191,7 +195,9 @@ Deno.test("test multi polygon", () => {
   );
   for (let i = 0; i < multiPolygon.numGeometries(); i++) {
     expect(
-      multiPolygon.getGeometry(i).equals(geometryCollection.getGeometry(i)),
+      multiPolygon.getGeometry(i).equals(
+        geometryCollection.getGeometry(i) as Polygon,
+      ),
     ).toBe(true);
   }
 
@@ -224,7 +230,9 @@ Deno.test("test multi polygon", () => {
   const multiSurface = geometryCollection.getAsMultiSurface();
   for (let i = 0; i < multiPolygon.numGeometries(); i++) {
     expect(
-      multiPolygon.getGeometry(i).equals(multiSurface.getGeometry(i)),
+      multiPolygon.getGeometry(i).equals(
+        multiSurface.getGeometry(i) as Polygon,
+      ),
     ).toBe(true);
   }
   const multiSurface2 = multiPolygon.getAsMultiSurface();

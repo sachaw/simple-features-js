@@ -130,7 +130,7 @@ export class DegreesCentroid {
       case GeometryType.MultiSurface:
       case GeometryType.MultiPolygon: {
         this.calculateGeometryCollection(
-          geometry as GeometryCollection<Geometry>,
+          geometry as GeometryCollection,
         );
         break;
       }
@@ -139,7 +139,7 @@ export class DegreesCentroid {
         break;
       }
       case GeometryType.CurvePolygon: {
-        this.calculateCurvePolygon(geometry as CurvePolygon<Curve>);
+        this.calculateCurvePolygon(geometry as CurvePolygon);
         break;
       }
       case GeometryType.Curve: {
@@ -208,7 +208,7 @@ export class DegreesCentroid {
    * @param geometryCollection Geometry Collection
    */
   private calculateGeometryCollection(
-    geometryCollection: GeometryCollection<Geometry>,
+    geometryCollection: GeometryCollection,
   ) {
     for (const geometry of geometryCollection.geometries) {
       this.calculate(geometry);
@@ -229,7 +229,7 @@ export class DegreesCentroid {
    * Add to the centroid calculation for the Curve Polygon
    * @param curvePolygon Curve Polygon
    */
-  private calculateCurvePolygon(curvePolygon: CurvePolygon<Curve>): void {
+  private calculateCurvePolygon(curvePolygon: CurvePolygon): void {
     for (const ring of curvePolygon.rings) {
       this.calculate(ring);
     }

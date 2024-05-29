@@ -84,10 +84,10 @@ export type GeometryUnion =
   | MultiPoint
   | MultiLineString
   | MultiPolygon
-  | GeometryCollection<Geometry>
+  | GeometryCollection
   | CircularString
   | CompoundCurve
-  | CurvePolygon<Curve>
+  | CurvePolygon
   | PolyhedralSurface
   | TIN
   | Triangle;

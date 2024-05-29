@@ -79,7 +79,7 @@ export class GeometryPrinter {
       case GeometryType.CurvePolygon: {
         GeometryPrinter.addCurvePolygonMessage(
           message,
-          geometry as CurvePolygon<Curve>,
+          geometry as CurvePolygon,
         );
         break;
       }
@@ -101,7 +101,7 @@ export class GeometryPrinter {
       case GeometryType.GeometryCollection:
       case GeometryType.MultiCurve:
       case GeometryType.MultiSurface: {
-        const geomCollection = geometry as GeometryCollection<Geometry>;
+        const geomCollection = geometry as GeometryCollection;
         message.push(`Geometries: ${geomCollection.numGeometries()}`);
         const geometries = geomCollection.geometries;
         for (let i = 0; i < geometries.length; i++) {
@@ -255,7 +255,7 @@ export class GeometryPrinter {
    */
   private static addCurvePolygonMessage(
     message: string[],
-    curvePolygon: CurvePolygon<Curve>,
+    curvePolygon: CurvePolygon,
   ): void {
     message.push(`Rings: ${curvePolygon.numRings()}`);
     const rings = curvePolygon.rings;

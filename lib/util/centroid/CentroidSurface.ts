@@ -63,7 +63,7 @@ export class CentroidSurface {
         break;
       }
       case GeometryType.CurvePolygon: {
-        this.addCurvePolygon(geometry as CurvePolygon<Curve>);
+        this.addCurvePolygon(geometry as CurvePolygon);
         break;
       }
       case GeometryType.PolyhedralSurface:
@@ -75,7 +75,7 @@ export class CentroidSurface {
       case GeometryType.MultiCurve:
       case GeometryType.MultiSurface: {
         for (
-          const subGeometry of (geometry as GeometryCollection<Geometry>)
+          const subGeometry of (geometry as GeometryCollection)
             .geometries
         ) {
           this.add(subGeometry);
@@ -126,7 +126,7 @@ export class CentroidSurface {
    *
    * @param curvePolygon curve polygon
    */
-  private addCurvePolygon(curvePolygon: CurvePolygon<Curve>): void {
+  private addCurvePolygon(curvePolygon: CurvePolygon): void {
     const rings: Curve[] = curvePolygon.rings;
 
     const curve: Curve = rings[0];

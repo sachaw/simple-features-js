@@ -60,7 +60,7 @@ export class CentroidCurve {
       case GeometryType.MultiCurve:
       case GeometryType.MultiSurface: {
         for (
-          const subGeometry of (geometry as GeometryCollection<Geometry>)
+          const subGeometry of (geometry as GeometryCollection)
             .geometries
         ) {
           this.add(subGeometry);
