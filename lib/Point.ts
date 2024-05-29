@@ -1,170 +1,183 @@
-import { GeometryType, Geometry } from "./internal";
+import { Geometry, GeometryType } from "./mod.ts";
 
 /**
  * A single location in space. Each point has an X and Y coordinate. A point MAY
  * optionally also have a Z and/or an M value.
  */
 export class Point extends Geometry {
-	/**
-	 * X coordinate
-	 */
-	private _x: number;
+  /**
+   * X coordinate
+   */
+  private _x: number;
 
-	/**
-	 * Y coordinate
-	 */
-	private _y: number;
+  /**
+   * Y coordinate
+   */
+  private _y: number;
 
-	/**
-	 * Z coordinate
-	 */
-	private _z: number;
+  /**
+   * Z coordinate
+   */
+  private _z: number | undefined;
 
-	/**
-	 * M value
-	 */
-	private _m: number;
+  /**
+   * M value
+   */
+  private _m: number | undefined;
 
-	public constructor();
-	public constructor(point: Point);
-	public constructor(x: number, y: number);
-	public constructor(x: number, y: number, z: number);
-	public constructor(x: number, y: number, z: number, m: number);
-	public constructor(hasZ: boolean, hasM: boolean, x: number, y: number);
+  /**
+   * Constructor
+   */
+  protected constructor(
+    geometryType: GeometryType,
+    hasZ?: boolean,
+    hasM?: boolean,
+  ) {
+    super(geometryType, hasZ, hasM);
+    this._x = 0;
+    this._y = 0;
+  }
 
-	/**
-	 * Constructor
-	 */
-	public constructor (...args: any[]) {
-		if (args.length === 0) {
-			super(GeometryType.POINT, false, false);
-			this._x = 0;
-			this._y = 0;
-		} else if (args.length === 1 && args[0] instanceof Point) {
-			super(GeometryType.POINT, args[0].hasZ, args[0].hasM);
-			this._x = args[0].x
-			this._y = args[0].y
-			this._z = args[0].z
-			this._m = args[0].m
-		} else if (args.length === 2) {
-			super(GeometryType.POINT, false, false);
-			this._x = args[0]
-			this._y = args[1]
-		} else if (args.length === 3) {
-			super(GeometryType.POINT, args[2] != null, false);
-			this._x = args[0]
-			this._y = args[1]
-			this._z = args[2]
-		} else if (args.length === 4) {
-			if (typeof args[0] === "boolean" && typeof args[1] === "boolean") {
-				super(GeometryType.POINT, args[0], args[1]);
-				this._x = args[2]
-				this._y = args[3]
-			} else {
-				super(GeometryType.POINT, args[2] != null, args[3] != null);
-				this._x = args[0]
-				this._y = args[1]
-				this._z = args[2]
-				this._m = args[3]
-			}
-		}
-	}
+  public static create(
+    hasZ?: boolean,
+    hasM?: boolean,
+  ): Point {
+    return new Point(GeometryType.Point, hasZ, hasM);
+  }
 
+  public static createFromXY(x: number, y: number): Point {
+    const point = Point.create();
+    point.x = x;
+    point.y = y;
+    return point;
+  }
 
-	/**
-	 * Get x
-	 * @return x
-	 */
-	public get x (): number {
-		return this._x;
-	}
+  public static createFromXYZ(x: number, y: number, z: number): Point {
+    const point = Point.create(true);
+    point.x = x;
+    point.y = y;
+    point.z = z;
+    return point;
+  }
 
-	/**
-	 * Set y
-	 * @param x
-	 */
-	public set x (x: number) {
-		this._x = x;
-	}
+  public static createFromXYZM(
+    x: number,
+    y: number,
+    z: number,
+    m: number,
+  ): Point {
+    const point = Point.create(true, true);
+    point.x = x;
+    point.y = y;
+    point.z = z;
+    point.m = m;
+    return point;
+  }
 
-	/**
-	 * Get y
-	 * @return y
-	 */
-	public get y (): number {
-		return this._y;
-	}
+  /**
+   * Get x
+   * @return x
+   */
+  public get x(): number {
+    return this._x;
+  }
 
-	/**
-	 * Set y
-	 * @param y
-	 */
-	public set y (y: number) {
-		this._y = y;
-	}
+  /**
+   * Set y
+   * @param x
+   */
+  public set x(x: number) {
+    this._x = x;
+  }
 
+  /**
+   * Get y
+   * @return y
+   */
+  public get y(): number {
+    return this._y;
+  }
 
-	/**
-	 * Get z
-	 * @return z
-	 */
-	public get z (): number {
-		return this._z;
-	}
+  /**
+   * Set y
+   * @param y
+   */
+  public set y(y: number) {
+    this._y = y;
+  }
 
-	/**
-	 * Set z
-	 * @param z
-	 */
-	public set z (z: number) {
-		this._z = z;
-		this.hasZ = z != null;
-	}
+  /**
+   * Get z
+   * @return z
+   */
+  public get z(): number | undefined {
+    return this._z;
+  }
 
-	/**
-	 * Get m
-	 * 
-	 * @return m
-	 */
-	public get m (): number {
-		return this._m;
-	}
+  /**
+   * Set z
+   * @param z
+   */
+  public set z(z: number | undefined) {
+    this._z = z;
+    this.hasZ = z !== undefined;
+  }
 
-	/**
-	 * Set m
-	 * @param m
-	 */
-	public set m (m: number) {
-		this._m = m;
-		this.hasM = m != null;
-	}
+  /**
+   * Get m
+   *
+   * @return m
+   */
+  public get m(): number | undefined {
+    return this._m;
+  }
 
+  /**
+   * Set m
+   * @param m
+   */
+  public set m(m: number | undefined) {
+    this._m = m;
+    this.hasM = m !== undefined;
+  }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public copy (): Geometry {
-		return new Point(this);
-	}
+  /**
+   * {@inheritDoc}
+   */
+  public copy(): Point {
+    const pointCopy = Point.create(this.hasZ, this.hasM);
+    pointCopy.x = this.x;
+    pointCopy.y = this.y;
+    pointCopy.z = this.z;
+    pointCopy.m = this.m;
+    return pointCopy;
+  }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public isEmpty (): boolean {
-		return false;
-	}
+  /**
+   * {@inheritDoc}
+   */
+  public isEmpty(): boolean {
+    return false;
+  }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public isSimple (): boolean {
-		return true;
-	}
+  /**
+   * {@inheritDoc}
+   */
+  public isSimple(): boolean {
+    return true;
+  }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public equals (obj: Geometry): boolean {
-		return super.equals(obj) && obj instanceof Point && this.m === obj.m && this.z === obj.z && this.x === obj.x && this.y === obj.y
-	}
+  /**
+   * {@inheritDoc}
+   */
+  public equals(obj: Point): boolean {
+    return (
+      super.equals(obj) &&
+      obj instanceof Point &&
+      this.m === obj.m &&
+      this.z === obj.z &&
+      this.x === obj.x &&
+      this.y === obj.y
+    );
+  }
 }

@@ -1,0 +1,15 @@
+{
+  "name": "@dewars/simple-features",
+  "version": "1.0.0",
+  "description": "OGC Simple Features JavaScript Library",
+  "imports": {
+    "@japa/assert": "npm:@japa/assert@^3.0.0",
+    "@japa/expect": "npm:@japa/expect@^3.0.2",
+    "@japa/runner": "npm:@japa/runner@^3.1.4",
+    "red-black-tree-typed": "npm:red-black-tree-typed@^1.51.9",
+    "timsort": "npm:timsort@^0.3.0"
+  },
+  "exports": {
+    ".": "./lib/mod.ts"
+  }
+}

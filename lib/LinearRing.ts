@@ -1,54 +1,71 @@
-import { GeometryType, Geometry, Point, LineString, SFException } from "./internal";
+import type { Point } from "./mod.ts";
+import { Geometry, GeometryType, LineString, SFException } from "./mod.ts";
 
 /**
  * A LineString that is both closed and simple.
  */
 export class LinearRing extends LineString {
-	public constructor();
-	public constructor(lineString: LineString);
-	public constructor(points: Array<Point>);
-	public constructor(hasZ: boolean, hasM: boolean);
-	public constructor(type: GeometryType, hasZ: boolean, hasM: boolean);
+  /**
+   * Constructor
+   */
+  protected constructor(
+    geometryType: GeometryType,
+    hasZ?: boolean,
+    hasM?: boolean,
+  ) {
+    super(geometryType, hasZ, hasM);
+  }
 
-	/**
-	 * Constructor
-	 */
-	public constructor (...args) {
-		if (args.length === 0) {
-			super(args)
-		} else if (args.length === 1 && args[0] instanceof LinearRing) {
-			super(args[0].hasZ, args[0].hasM);
-			args[0].points.forEach(point => this.addPoint(point.copy() as Point));
-		} else if (args.length === 1 && args[0].length != null) {
-			super(Geometry.hasZ(args[0]), Geometry.hasM(args[0]));
-			this.points = args[0];
-		} else if (args.length === 2) {
-			super(args[0], args[1])
-		}
-	}
+  /**
+   * Create an empty linear ring
+   * @return linear ring
+   */
+  public static create(
+    hasZ?: boolean,
+    hasM?: boolean,
+  ): LinearRing {
+    // TODO: Check if it should have it's own GeometryType
+    return new LinearRing(GeometryType.LineString, hasZ, hasM);
+  }
 
+  /**
+   * Create a linear ring
+   * @param points points
+   * @return linear ring
+   */
+  public static createFromPoints(points: Point[]): LinearRing {
+    const hasZ = Geometry.hasZ(points);
+    const hasM = Geometry.hasM(points);
+    const linearRing = LinearRing.create(hasZ, hasM);
+    linearRing.points = points;
+    return linearRing;
+  }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public set points(points: Array<Point>) {
-		// @ts-ignore
-		super.points = points;
-		if (!this.isEmpty()) {
-			if (!this.isClosed()) {
-				this.addPoint(points[0]);
-			}
-			if (this.numPoints() < 4) {
-				throw new SFException("A closed linear ring must have at least four points.");
-			}
-		}
-	}
+  /**
+   * {@inheritDoc}
+   */
+  public set points(points: Point[]) {
+    super.points = points;
+    if (!this.isEmpty()) {
+      if (!this.isClosed()) {
+        this.addPoint(points[0]);
+      }
+      if (this.numPoints() < 4) {
+        throw new SFException(
+          "A closed linear ring must have at least four points.",
+        );
+      }
+    }
+  }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public copy(): Geometry {
-		return new LinearRing(this);
-	}
-
+  /**
+   * {@inheritDoc}
+   */
+  public copy(): LinearRing {
+    const linearRingCopy = LinearRing.create(this.hasZ, this.hasM);
+    for (const point of this.points) {
+      linearRingCopy.addPoint(point.copy());
+    }
+    return linearRingCopy;
+  }
 }

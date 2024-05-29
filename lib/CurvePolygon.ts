@@ -1,4 +1,10 @@
-import { GeometryType, Geometry, Surface, Curve, UnsupportedOperationException } from "./internal";
+import { Curve, LineString, SFException } from "./mod.ts";
+import {
+  Geometry,
+  GeometryType,
+  Surface,
+  UnsupportedOperationException,
+} from "./mod.ts";
 
 /**
  * A planar surface defined by an exterior ring and zero or more interior ring.
@@ -6,165 +12,200 @@ import { GeometryType, Geometry, Surface, Curve, UnsupportedOperationException }
  * @param <T> curve type
  */
 export class CurvePolygon<T extends Curve> extends Surface {
-	/**
-	 * List of rings
-	 */
-	private _rings: Array<T>;
+  /**
+   * List of rings
+   */
+  private _rings: T[] = [];
 
-	public constructor();
-	public constructor(hasZ: boolean, hasM: boolean);
-	public constructor(rings: Array<T>);
-	public constructor(ring: T);
-	public constructor(curvePolygon: CurvePolygon<T>);
-	public constructor(type: GeometryType, hasZ: boolean, hasM: boolean);
+  /**
+   * Constructor
+   */
+  protected constructor(
+    geometryType: GeometryType,
+    hasZ?: boolean,
+    hasM?: boolean,
+  ) {
+    super(geometryType, hasZ, hasM);
+    this._rings = [];
+  }
 
-	/**
-	 * Constructor
-	 */
-	public constructor (...args) {
-		if (args.length === 0) {
-			super(GeometryType.CURVEPOLYGON, false, false);
-			this._rings = [];
-		} else if (args.length === 2) {
-			super(GeometryType.CURVEPOLYGON, args[0], args[1]);
-			this._rings = [];
-		} else if (args.length === 1 && args[0].length != null) {
-			super(GeometryType.CURVEPOLYGON, Geometry.hasZ(args[0]), Geometry.hasM(args[0]));
-			this.rings = args[0] || [];
-		} else if (args.length === 1 && args[0] instanceof Curve) {
-			super(GeometryType.CURVEPOLYGON, args[0].hasZ, args[0].hasM);
-			this._rings = [];
-			this.addRing(args[0] as T);
-		} else if (args.length === 1 && args[0] instanceof CurvePolygon) {
-			super(GeometryType.CURVEPOLYGON, args[0].hasZ, args[0].hasM);
-			this._rings = [];
-			args[0].rings.forEach(ring => this.addRing(ring.copy() as T))
-		} else if (args.length === 3) {
-			super(args[0], args[1], args[2]);
-			this._rings = [];
-		}
-	}
+  /**
+   * Create an empty curve polygon
+   */
+  public static create(
+    hasZ?: boolean,
+    hasM?: boolean,
+  ): CurvePolygon<Curve> {
+    return new CurvePolygon(GeometryType.CurvePolygon, hasZ, hasM);
+  }
 
+  /**
+   * Create a curve polygon
+   * @param rings rings
+   * @return curve polygon
+   */
+  public static createFromRings(
+    rings: LineString[],
+  ): CurvePolygon<Curve> {
+    const hasZ = Geometry.hasZ(rings);
+    const hasM = Geometry.hasM(rings);
+    const curvePolygon = CurvePolygon.create(hasZ, hasM);
+    curvePolygon.rings = rings;
+    return curvePolygon;
+  }
 
-	/**
-	 * Get the rings
-	 * @return rings
-	 */
-	public get rings(): Array<T> {
-		return this._rings;
-	}
+  /**
+   * Create a curve polygon
+   * @param ring ring
+   * @return curve polygon
+   */
+  public static createFromRing(
+    ring: LineString,
+  ): CurvePolygon<Curve> {
+    const hasZ = ring.hasZ;
+    const hasM = ring.hasM;
+    const curvePolygon = CurvePolygon.create(hasZ, hasM);
+    curvePolygon.addRing(ring);
+    return curvePolygon;
+  }
 
-	/**
-	 * Set the rings
-	 * @param rings rings
-	 */
-	public set rings(rings: Array<T>) {
-		this._rings = [];
-		rings.forEach(ring => this.addRing(ring));
-	}
+  /**
+   * Get the rings
+   * @return rings
+   */
+  public get rings(): T[] {
+    return this._rings;
+  }
 
-	/**
-	 * Add a ring
-	 * @param ring ring
-	 */
-	public addRing(ring: T): void {
-		this._rings.push(ring);
-		this.updateZM(ring);
-	}
+  /**
+   * Set the rings
+   * @param rings rings
+   */
+  public set rings(rings: T[]) {
+    this._rings = [];
+    for (const ring of rings) {
+      this.addRing(ring);
+    }
+  }
 
-	/**
-	 * Add rings
-	 * @param rings rings
-	 */
-	public addRings(rings: Array<T>): void {
-		rings.forEach(ring => this.addRing(ring));
-	}
+  /**
+   * Add a ring
+   * @param ring ring
+   */
+  public addRing(ring: T): void {
+    this._rings.push(ring);
+    this.updateZM(ring);
+  }
 
-	/**
-	 * Get the number of rings including exterior and interior
-	 * @return number of rings
-	 */
-	public numRings(): number {
-		return this._rings.length;
-	}
+  /**
+   * Add rings
+   * @param rings rings
+   */
+  public addRings(rings: T[]): void {
+    for (const ring of rings) {
+      this.addRing(ring);
+    }
+  }
 
-	/**
-	 * Returns the Nth ring where the exterior ring is at 0, interior rings
-	 * begin at 1
-	 * @param n nth ring to return
-	 * @return ring
-	 */
-	public getRing (n: number): Curve {
-		return this._rings[n];
-	}
+  /**
+   * Get the number of rings including exterior and interior
+   * @return number of rings
+   */
+  public numRings(): number {
+    return this._rings.length;
+  }
 
-	/**
-	 * Get the exterior ring
-	 * 
-	 * @return exterior ring
-	 */
-	public getExteriorRing (): T {
-		return this._rings[0];
-	}
+  /**
+   * Returns the Nth ring where the exterior ring is at 0, interior rings
+   * begin at 1
+   * @param n nth ring to return
+   * @return ring
+   */
+  public getRing(n: number): T {
+    return this._rings[n];
+  }
 
-	/**
-	 * Get the number of interior rings
-	 * 
-	 * @return number of interior rings
-	 */
-	public numInteriorRings(): number {
-		return this._rings.length - 1;
-	}
+  /**
+   * Get the exterior ring
+   *
+   * @return exterior ring
+   */
+  public getExteriorRing(): T {
+    return this._rings[0];
+  }
 
-	/**
-	 * Returns the Nth interior ring for this Polygon
-	 * @param n interior ring number
-	 * @return interior ring
-	 */
-	public getInteriorRing(n: number): T {
-		return this._rings[n + 1];
-	}
+  /**
+   * Get the number of interior rings
+   *
+   * @return number of interior rings
+   */
+  public numInteriorRings(): number {
+    return this._rings.length - 1;
+  }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public copy(): Geometry {
-		return new CurvePolygon(this);
-	}
+  /**
+   * Returns the Nth interior ring for this Polygon
+   * @param n interior ring number
+   * @return interior ring
+   */
+  public getInteriorRing(n: number): T {
+    return this._rings[n + 1];
+  }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public isEmpty(): boolean {
-		return this._rings.length === 0;
-	}
+  /**
+   * {@inheritDoc}
+   */
+  public copy(): Geometry {
+    const curvePolygonCopy = CurvePolygon.create(
+      this.hasZ,
+      this.hasM,
+    );
+    for (const ring of this.rings) {
+      const copy = ring.copy();
+      if (copy instanceof Curve) {
+        curvePolygonCopy.addRing(copy);
+      } else {
+        throw new SFException("CurvePolygon copy failed, ring is not a curve");
+      }
+    }
+    return curvePolygonCopy;
+  }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public isSimple(): boolean {
-		throw new UnsupportedOperationException("Is Simple not implemented for CurvePolygon");
-	}
+  /**
+   * {@inheritDoc}
+   */
+  public isEmpty(): boolean {
+    return this._rings.length === 0;
+  }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public equals(obj: Geometry): boolean {
-		let equal = true;
-		if (obj instanceof CurvePolygon) {
-			if (this.numRings() === obj.numRings()) {
-				for (let i = 0; i < this.numRings(); i++) {
-					if (!this.getRing(i).equals(obj.getRing(i))) {
-						equal = false;
-						break;
-					}
-				}
-			} else {
-				equal = false;
-			}
-		} else {
-			equal = false;
-		}
-		return equal
-	}
+  /**
+   * {@inheritDoc}
+   */
+  public isSimple(): boolean {
+    throw new UnsupportedOperationException(
+      "Is Simple not implemented for CurvePolygon",
+    );
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public equals(obj: CurvePolygon<T>): boolean {
+    let equal = true;
+    if (obj instanceof CurvePolygon) {
+      if (this.numRings() === obj.numRings()) {
+        for (let i = 0; i < this.numRings(); i++) {
+          if (!this.getRing(i).equals(obj.getRing(i))) {
+            equal = false;
+            break;
+          }
+        }
+      } else {
+        equal = false;
+      }
+    } else {
+      equal = false;
+    }
+    return equal;
+  }
 }

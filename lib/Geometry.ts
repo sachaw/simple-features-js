@@ -1,10 +1,10 @@
-import {GeometryEnvelope, GeometryEnvelopeBuilder, GeometryType, GeometryUtils, Point } from './internal'
+import type { GeometryEnvelope, GeometryType, Point } from "./mod.ts";
+import { GeometryEnvelopeBuilder, GeometryUtils } from "./mod.ts";
 
 /**
  * The root of the geometry type hierarchy
  */
 export abstract class Geometry {
-
   /**
    * Geometry type
    */
@@ -26,7 +26,11 @@ export abstract class Geometry {
    * @param hasZ has z
    * @param hasM has m
    */
-  protected constructor(geometryType: GeometryType, hasZ: boolean, hasM: boolean) {
+  protected constructor(
+    geometryType: GeometryType,
+    hasZ: boolean = false,
+    hasM: boolean = false,
+  ) {
     this._geometryType = geometryType;
     this._hasZ = hasZ;
     this._hasM = hasM;
@@ -52,7 +56,7 @@ export abstract class Geometry {
    * Set if the geometry has z coordinates
    * @param hasZ true if has z coordinates
    */
-  public set hasZ (hasZ: boolean) {
+  public set hasZ(hasZ: boolean) {
     this._hasZ = hasZ;
   }
 
@@ -61,7 +65,7 @@ export abstract class Geometry {
    * @return true if has z coordinates
    * @see #hasZ()
    */
-  public get is3D (): boolean {
+  public get is3D(): boolean {
     return this.hasZ;
   }
 
@@ -69,7 +73,7 @@ export abstract class Geometry {
    * Does the geometry have m coordinates
    * @return true if has m coordinates
    */
-  public get hasM (): boolean {
+  public get hasM(): boolean {
     return this._hasM;
   }
 
@@ -77,7 +81,7 @@ export abstract class Geometry {
    * Set if the geometry has m coordinates
    * @param hasM true if has m coordinates
    */
-  public set hasM (hasM: boolean) {
+  public set hasM(hasM: boolean) {
     this._hasM = hasM;
   }
 
@@ -85,7 +89,7 @@ export abstract class Geometry {
    * Update currently false hasZ and hasM values using the provided geometry
    * @param geometry  geometry
    */
-  public updateZM (geometry: Geometry): void {
+  public updateZM(geometry: Geometry): void {
     if (!this.hasZ) {
       this.hasZ = geometry.hasZ;
     }
@@ -99,7 +103,9 @@ export abstract class Geometry {
    * @param geometries list of geometries
    * @return true if has z
    */
-  public static hasZ (geometries: Array<Geometry>) : boolean{
+  public static hasZ(
+    geometries: Geometry[],
+  ): boolean {
     let hasZ = false;
     for (const geometry of geometries) {
       if (geometry.hasZ) {
@@ -115,7 +121,9 @@ export abstract class Geometry {
    * @param geometries list of geometries
    * @return true if has m
    */
-  public static hasM (geometries: Array<Geometry>) {
+  public static hasM(
+    geometries: Geometry[],
+  ): boolean {
     let hasM = false;
     for (const geometry of geometries) {
       if (geometry.hasM) {
@@ -131,7 +139,7 @@ export abstract class Geometry {
    * @return true if has m coordinates
    * @see #hasM()
    */
-  public isMeasured (): boolean {
+  public isMeasured(): boolean {
     return this.hasM;
   }
 
@@ -201,7 +209,11 @@ export abstract class Geometry {
    */
   public abstract isSimple(): boolean;
 
-  public equals (obj: Geometry): boolean {
-    return !(this.geometryType !== obj.geometryType || this.hasM !== obj.hasM || this.hasZ !== obj.hasZ)
+  public equals(obj: Geometry): boolean {
+    return !(
+      this.geometryType !== obj.geometryType ||
+      this.hasM !== obj.hasM ||
+      this.hasZ !== obj.hasZ
+    );
   }
 }

@@ -1,103 +1,108 @@
-import { GeometryType, Geometry, Point, GeometryCollection } from "./internal";
+import type { Point } from "./mod.ts";
+import { Geometry, GeometryCollection, GeometryType } from "./mod.ts";
 
 /**
  * A restricted form of GeometryCollection where each Geometry in the collection
  * must be of type Point.
  */
-
 export class MultiPoint extends GeometryCollection<Point> {
+  /**
+   * Constructor
+   */
+  protected constructor(
+    geometryType: GeometryType,
+    hasZ?: boolean,
+    hasM?: boolean,
+  ) {
+    super(geometryType, hasZ, hasM);
+  }
 
-	public constructor();
-	public constructor(hasZ: boolean, hasM: boolean);
-	public constructor(multiPoint: MultiPoint);
-	public constructor(points: Array<Point>);
-	public constructor(type: GeometryType, hasZ: boolean, hasM: boolean);
+  public static create(
+    hasZ?: boolean,
+    hasM?: boolean,
+  ): MultiPoint {
+    return new MultiPoint(GeometryType.MultiPoint, hasZ, hasM);
+  }
 
-	/**
-	 * Constructor
-	 */
-	public constructor(...args) {
-		if (args.length === 0) {
-			super(GeometryType.MULTIPOINT, false, false);
-		} else if (args.length === 2) {
-			super(GeometryType.MULTIPOINT, args[0], args[1]);
-		} else if (args.length === 1 && args[0] instanceof Point) {
-			super(GeometryType.MULTIPOINT, args[0].hasZ, args[0].hasM);
-			this.addPoint(args[0]);
-		} else if (args.length === 1 && args[0] instanceof MultiPoint) {
-			super(GeometryType.MULTIPOINT, args[0].hasZ, args[0].hasM);
-			args[0].points.forEach(point => this.addPoint(point));
-		} else if (args.length === 1 && args[0].length != null) {
-			super(GeometryType.MULTIPOINT, GeometryCollection.hasZ(args[0]), GeometryCollection.hasM(args[0]));
-			this.points = args[0];
-		} else if (args.length === 3) {
-			super(args[0], args[1], args[2]);
-		}
-	}
+  public static createFromPoints(points: Point[]): MultiPoint {
+    const hasZ = Geometry.hasZ(points);
+    const hasM = Geometry.hasM(points);
+    const multiPoint = MultiPoint.create(hasZ, hasM);
+    for (const point of points) {
+      multiPoint.addPoint(point);
+    }
+    return multiPoint;
+  }
 
-	/**
-	 * Get the points
-	 * @return points
-	 */
-	public get points(): Array<Point> {
-		return this.geometries;
-	}
+  /**
+   * Get the points
+   * @return points
+   */
+  public get points(): Point[] {
+    return this.geometries;
+  }
 
-	/**
-	 * Set the points
-	 * @param points points
-	 */
-	public set points(points: Array<Point>) {
-		this.geometries = points;
-	}
+  /**
+   * Set the points
+   * @param points points
+   */
+  public set points(points: Point[]) {
+    this.geometries = points;
+  }
 
-	/**
-	 * Add a point
-	 * @param point point
-	 */
-	public addPoint(point: Point): void {
-		this.addGeometry(point);
-	}
+  /**
+   * Add a point
+   * @param point point
+   */
+  public addPoint(point: Point): void {
+    this.addGeometry(point);
+  }
 
-	/**
-	 * Add points
-	 * @param points points
-	 */
-	public addPoints(points: Array<Point>): void {
-		this.addGeometries(points);
-	}
+  /**
+   * Add points
+   * @param points points
+   */
+  public addPoints(points: Point[]): void {
+    this.addGeometries(points);
+  }
 
-	/**
-	 * Get the number of points
-	 * @return number of points
-	 */
-	public numPoints(): number {
-		return this.numGeometries();
-	}
+  /**
+   * Get the number of points
+   * @return number of points
+   */
+  public numPoints(): number {
+    return this.numGeometries();
+  }
 
-	/**
-	 * Returns the Nth point
-	 * 
-	 * @param n nth point to return
-	 * @return point
-	 */
-	public getPoint(n: number): Point{
-		return this.getGeometry(n);
-	}
+  /**
+   * Returns the Nth point
+   *
+   * @param n nth point to return
+   * @return point
+   */
+  public getPoint(n: number): Point {
+    return this.getGeometry(n);
+  }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public copy(): Geometry {
-		return new MultiPoint(this);
-	}
+  /**
+   * {@inheritDoc}
+   */
+  public copy(): MultiPoint {
+    const multiPointCopy = MultiPoint.create(this.hasZ, this.hasM);
+    for (const point of this.points) {
+      multiPointCopy.addPoint(point.copy());
+    }
+    return multiPointCopy;
+  }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public isSimple(): boolean {
-		return this.points.filter((pA, index) => {
-			return this.points.findIndex(pB => pA.equals(pB)) === index;
-		}).length == this.numPoints();
-	}
+  /**
+   * {@inheritDoc}
+   */
+  public isSimple(): boolean {
+    return (
+      this.points.filter((pA, index) => {
+        return this.points.findIndex((pB) => pA.equals(pB)) === index;
+      }).length === this.numPoints()
+    );
+  }
 }

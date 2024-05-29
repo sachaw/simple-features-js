@@ -1,5 +1,5 @@
-import { GeometryType, Geometry, GeometryCollection, SFException } from "../internal";
-
+import type { Geometry } from "../mod.ts";
+import { GeometryCollection, GeometryType, SFException } from "../mod.ts";
 
 /**
  * Extended Geometry Collection providing abstract geometry collection type
@@ -7,86 +7,118 @@ import { GeometryType, Geometry, GeometryCollection, SFException } from "../inte
  *
  * @param <T> geometry type
  */
-export class ExtendedGeometryCollection<T extends Geometry> extends GeometryCollection<T> {
-	/**
-	 * Extended geometry collection geometry type
-	 */
-	private _editableGeometryType: GeometryType;
+export class ExtendedGeometryCollection<T extends Geometry>
+  extends GeometryCollection<T> {
+  /**
+   * Extended geometry collection geometry type
+   */
+  private _editableGeometryType: GeometryType | undefined;
 
-	public constructor (geometryCollection: GeometryCollection<T>);
-	public constructor (extendedGeometryCollection: ExtendedGeometryCollection<T>);
+  /**
+   * Constructor
+   */
+  protected constructor(
+    geometryType: GeometryType,
+    hasZ?: boolean,
+    hasM?: boolean,
+  ) {
+    super(geometryType, hasZ, hasM);
+  }
 
-	public constructor(...args) {
-		if (args.length === 1 && args[0] instanceof GeometryCollection) {
-			super(GeometryType.GEOMETRYCOLLECTION, args[0].hasZ, args[0].hasM);
-			this.geometryType = GeometryType.GEOMETRYCOLLECTION
-			this.geometries = args[0].geometries;
-			this.updateGeometryType();
-		} else if (args.length === 1 && args[0] instanceof ExtendedGeometryCollection) {
-			super(GeometryType.GEOMETRYCOLLECTION, args[0].hasZ, args[0].hasM);
-			this.geometryType = GeometryType.GEOMETRYCOLLECTION
-			for (const geometry of args[0].geometries) {
-				const geometryCopy = geometry.copy();
-				this.addGeometry(geometryCopy);
-			}
-			this.geometryType = args[0].geometryType;
-		}
-	}
+  public static create(
+    hasZ?: boolean,
+    hasM?: boolean,
+  ): ExtendedGeometryCollection<Geometry> {
+    return new ExtendedGeometryCollection(
+      GeometryType.GeometryCollection,
+      hasZ,
+      hasM,
+    );
+  }
 
-	/**
-	 * Update the extended geometry type based upon the contained geometries
-	 */
-	public updateGeometryType(): void {
-		let geometryType = this.getCollectionType();
-		switch (geometryType) {
-		case GeometryType.GEOMETRYCOLLECTION:
-		case GeometryType.MULTICURVE:
-		case GeometryType.MULTISURFACE:
-			break;
-		case GeometryType.MULTIPOINT:
-			geometryType = GeometryType.GEOMETRYCOLLECTION;
-			break;
-		case GeometryType.MULTILINESTRING:
-			geometryType = GeometryType.MULTICURVE;
-			break;
-		case GeometryType.MULTIPOLYGON:
-			geometryType = GeometryType.MULTISURFACE;
-			break;
-		default:
-			throw new SFException(
-					"Unsupported extended geometry collection geometry type: "
-							+ geometryType);
-		}
-		this.geometryType = geometryType;
-	}
+  public static createFromGeometryCollection(
+    geometryCollection: GeometryCollection<Geometry>,
+  ): ExtendedGeometryCollection<Geometry> {
+    const extendedGeometryCollection = ExtendedGeometryCollection.create(
+      geometryCollection.hasZ,
+      geometryCollection.hasM,
+    );
+    for (const geometry of geometryCollection.geometries) {
+      extendedGeometryCollection.addGeometry(geometry);
+    }
+    return extendedGeometryCollection;
+  }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public get geometryType(): GeometryType {
-		return this._editableGeometryType;
-	}
+  /**
+   * Update the extended geometry type based upon the contained geometries
+   */
+  public updateGeometryType(): void {
+    let geometryType = this.getCollectionType();
+    switch (geometryType) {
+      case GeometryType.GeometryCollection:
+      case GeometryType.MultiCurve:
+      case GeometryType.MultiSurface:
+        break;
+      case GeometryType.MultiPoint: {
+        geometryType = GeometryType.GeometryCollection;
+        break;
+      }
+      case GeometryType.MultiLineString: {
+        geometryType = GeometryType.MultiCurve;
+        break;
+      }
+      case GeometryType.MultiPolygon: {
+        geometryType = GeometryType.MultiSurface;
+        break;
+      }
+      default:
+        throw new SFException(
+          `Unsupported extended geometry collection geometry type: ${geometryType}`,
+        );
+    }
+    this.geometryType = geometryType;
+  }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public set geometryType(geometryType: GeometryType) {
-		this._editableGeometryType = geometryType;
-	}
+  /**
+   * {@inheritDoc}
+   */
+  public get geometryType(): GeometryType {
+    if (!this._editableGeometryType) {
+      throw new SFException("Geometry type is not editable");
+    }
+    return this._editableGeometryType;
+  }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public copy(): Geometry {
-		return new ExtendedGeometryCollection<T>(this);
-	}
+  /**
+   * {@inheritDoc}
+   */
+  public set geometryType(geometryType: GeometryType) {
+    this._editableGeometryType = geometryType;
+  }
 
+  /**
+   * {@inheritDoc}
+   */
+  public copy(): ExtendedGeometryCollection<T | Geometry> {
+    const extendedGeometryCollectionCopy = ExtendedGeometryCollection.create(
+      this.hasZ,
+      this.hasM,
+    );
+    for (const geometry of this.geometries) {
+      extendedGeometryCollectionCopy.addGeometry(geometry.copy());
+    }
+    return extendedGeometryCollectionCopy;
+  }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public equals(obj: Geometry): boolean {
-		return (obj instanceof ExtendedGeometryCollection && this.geometryType === obj.geometryType);
-	}
-
+  /**
+   * {@inheritDoc}
+   */
+  public equals(
+    obj: Geometry,
+  ): boolean {
+    return (
+      obj instanceof ExtendedGeometryCollection &&
+      this.geometryType === obj.geometryType
+    );
+  }
 }

@@ -1,51 +1,56 @@
-import { Geometry, Point, LineString, SFException } from "./internal";
+import { Geometry, GeometryType, LineString } from "./mod.ts";
+import type { Point } from "./mod.ts";
 
 /**
  * A LineString with exactly 2 Points.
  */
 export class Line extends LineString {
-	public constructor();
-	public constructor(hasZ: boolean, hasM: boolean);
-	public constructor(points: Array<Point>);
-	public constructor(line: Line);
-	/**
-	 * Constructor
-	 * 
-	 * @param point1
-	 *            first point
-	 * @param point2
-	 *            second point
-	 * @since 1.1.1
-	 */
-	public constructor(point1: Point, point2: Point);
+  /**
+   * Constructor
+   */
+  protected constructor(
+    geometryType: GeometryType,
+    hasZ?: boolean,
+    hasM?: boolean,
+  ) {
+    super(geometryType, hasZ, hasM);
+  }
 
-	/**
-	 * Constructor
-	 */
-	public constructor (...args) {
-		if (args.length === 0) {
-			super(false, false);
-		} else if (args.length === 1 && args[0] instanceof Line) {
-			super(args[0].hasZ, args[0].hasM);
-			args[0].points.forEach(point => this.addPoint(point.copy() as Point));
-		} else if (args.length === 1 && args[0].length != null) {
-			super(Geometry.hasZ(args[0]), Geometry.hasM(args[0]));
-			this.points = args[0];
-		} else if (args.length === 2 && typeof args[0] === 'boolean') {
-			super(args[0], args[1]);
-		} else if (args.length === 2 && args[0] instanceof Point && args[1] instanceof Point) {
-			const point1: Point = args[0];
-			const point2: Point = args[1];
-			super(point1.hasZ || point2.hasZ, point1.hasM || point2.hasM);
-		    this.addPoint(point1);
-		    this.addPoint(point2);
-		}
-	}
+  public static create(
+    hasZ?: boolean,
+    hasM?: boolean,
+  ): Line {
+    // TODO: Check if it should have it's own GeometryType
+    return new Line(GeometryType.LineString, hasZ, hasM);
+  }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public copy(): Geometry {
-		return new Line(this);
-	}
+  public static createFromPoints(points: Point[]): Line {
+    const hasZ = Geometry.hasZ(points);
+    const hasM = Geometry.hasM(points);
+    const line = Line.create(hasZ, hasM);
+    for (const point of points) {
+      line.addPoint(point);
+    }
+    return line;
+  }
+
+  public static createFromTwoPoints(point1: Point, point2: Point): Line {
+    const hasZ = point1.hasZ || point2.hasZ;
+    const hasM = point1.hasM || point2.hasM;
+    const line = Line.create(hasZ, hasM);
+    line.addPoint(point1);
+    line.addPoint(point2);
+    return line;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public copy(): Line {
+    const lineCopy = Line.create(this.hasZ, this.hasM);
+    for (const point of this.points) {
+      lineCopy.addPoint(point.copy());
+    }
+    return lineCopy;
+  }
 }

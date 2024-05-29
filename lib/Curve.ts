@@ -1,4 +1,5 @@
-import { GeometryType, Geometry, Point } from "./internal";
+import type { GeometryType, Point } from "./mod.ts";
+import { Geometry } from "./mod.ts";
 
 /**
  * The base type for all 1-dimensional geometry types. A 1-dimensional geometry
@@ -8,41 +9,44 @@ import { GeometryType, Geometry, Point } from "./internal";
  * curve is called a ring.
  */
 export abstract class Curve extends Geometry {
-	/**
-	 * Constructor
-	 * @param type geometry type
-	 * @param hasZ has z
-	 * @param hasM has m
-	 */
-	protected constructor (type: GeometryType, hasZ: boolean, hasM: boolean) {
-		super(type, hasZ, hasM);
-	}
+  /**
+   * Constructor
+   * @param type geometry type
+   * @param hasZ has z
+   * @param hasM has m
+   */
+  protected constructor(
+    geometryType: GeometryType,
+    hasZ?: boolean,
+    hasM?: boolean,
+  ) {
+    super(geometryType, hasZ, hasM);
+  }
 
-	/**
-	 * Get the start Point of this Curve
-	 *
-	 * @return start point
-	 */
-	public abstract startPoint (): Point;
+  /**
+   * Get the start Point of this Curve
+   *
+   * @return start point
+   */
+  public abstract startPoint(): Point;
 
-	/**
-	 * Get the end Point of this Curve
-	 *
-	 * @return end point
-	 */
-	public abstract endPoint (): Point;
+  /**
+   * Get the end Point of this Curve
+   *
+   * @return end point
+   */
+  public abstract endPoint(): Point;
 
-	/**
-	 * Determine if this Curve is closed (start point = end point)
-	 * @return true if closed
-	 */
-	public isClosed (): boolean {
-		return !this.isEmpty() && this.startPoint().equals(this.endPoint());
-	}
+  /**
+   * Determine if this Curve is closed (start point = end point)
+   * @return true if closed
+   */
+  public isClosed(): boolean {
+    return !this.isEmpty() && this.startPoint().equals(this.endPoint());
+  }
 
-	/**
-	 * Check for curve equality
-	 */
-	public abstract equals (obj: Geometry): boolean;
-
+  /**
+   * Check for curve equality
+   */
+  public abstract equals(obj: Geometry): boolean;
 }

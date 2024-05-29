@@ -1,4 +1,5 @@
-import { GeometryType, Surface, GeometryCollection } from "./internal";
+import type { GeometryType, Surface } from "./mod.ts";
+import { GeometryCollection } from "./mod.ts";
 
 /**
  * A restricted form of GeometryCollection where each Geometry in the collection
@@ -6,68 +7,71 @@ import { GeometryType, Surface, GeometryCollection } from "./internal";
  *
  * @param <T> surface type
  */
-export abstract class MultiSurface<T extends Surface> extends GeometryCollection<T> {
+export abstract class MultiSurface<
+  T extends Surface,
+> extends GeometryCollection<T> {
+  /**
+   * Constructor
+   *
+   * @param type geometry type
+   * @param hasZ has z
+   * @param hasM has m
+   */
+  protected constructor(
+    geometryType: GeometryType,
+    hasZ?: boolean,
+    hasM?: boolean,
+  ) {
+    super(geometryType, hasZ, hasM);
+  }
 
-	/**
-	 * Constructor
-	 * 
-	 * @param type geometry type
-	 * @param hasZ has z
-	 * @param hasM has m
-	 */
-	protected constructor(type: GeometryType, hasZ: boolean, hasM: boolean) {
-		super(type, hasZ, hasM);
-	}
+  /**
+   * Get the surfaces
+   * @return surfaces
+   */
+  public getSurfaces(): T[] {
+    return this.geometries;
+  }
 
-	/**
-	 * Get the surfaces
-	 * @return surfaces
-	 */
-	public getSurfaces(): Array<T> {
-		return this.geometries;
-	}
+  /**
+   * Set the surfaces
+   * @param surfaces surfaces
+   */
+  public setSurfaces(surfaces: T[]): void {
+    this.geometries = surfaces;
+  }
 
-	/**
-	 * Set the surfaces
-	 * @param surfaces surfaces
-	 */
-	public setSurfaces(surfaces: Array<T>): void {
-		this.geometries = surfaces;
-	}
+  /**
+   * Add a surface
+   * @param surface surface
+   */
+  public addSurface(surface: T): void {
+    this.addGeometry(surface);
+  }
 
-	/**
-	 * Add a surface
-	 * @param surface surface
-	 */
-	public addSurface(surface: T): void {
-		this.addGeometry(surface);
-	}
+  /**
+   * Add surfaces
+   *
+   * @param surfaces surfaces
+   */
+  public addSurfaces(surfaces: T[]): void {
+    this.addGeometries(surfaces);
+  }
 
-	/**
-	 * Add surfaces
-	 * 
-	 * @param surfaces
-	 *            surfaces
-	 */
-	public addSurfaces(surfaces: Array<T>): void {
-		this.addGeometries(surfaces);
-	}
+  /**
+   * Get the number of surfaces
+   * @return number of surfaces
+   */
+  public numSurfaces(): number {
+    return this.numGeometries();
+  }
 
-	/**
-	 * Get the number of surfaces
-	 * @return number of surfaces
-	 */
-	public numSurfaces(): number {
-		return this.numGeometries();
-	}
-
-	/**
-	 * Returns the Nth surface
-	 * @param n nth line surface to return
-	 * @return surface
-	 */
-	public getSurface(n: number): T {
-		return this.getGeometry(n);
-	}
-
+  /**
+   * Returns the Nth surface
+   * @param n nth line surface to return
+   * @return surface
+   */
+  public getSurface(n: number): T {
+    return this.getGeometry(n);
+  }
 }

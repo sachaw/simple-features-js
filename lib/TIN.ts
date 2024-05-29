@@ -1,43 +1,67 @@
-import { GeometryType, Geometry, PolyhedralSurface, Polygon } from "./internal";
+import { GeometryType, PolyhedralSurface } from "./mod.ts";
+import type { Polygon } from "./mod.ts";
 
 /**
  * A tetrahedron (4 triangular faces), corner at the origin and each unit
  * coordinate digit.
  */
 export class TIN extends PolyhedralSurface {
-	public constructor();
-	public constructor(polygon: Polygon);
-	public constructor(tin: TIN);
-	public constructor(polygons: Array<Polygon>);
-	public constructor(hasZ: boolean, hasM: boolean);
-	public constructor(type: GeometryType, hasZ: boolean, hasM: boolean);
+  /**
+   * Constructor
+   */
+  protected constructor(
+    geometryType: GeometryType,
+    hasZ?: boolean,
+    hasM?: boolean,
+  ) {
+    super(geometryType, hasZ, hasM);
+  }
 
-	/**
-	 * Constructor
-	 */
-	public constructor (...args: any[]) {
-		if (args.length === 0) {
-			super(GeometryType.TIN, false, false);
-		} else if (args.length === 1 && args[0] instanceof Polygon) {
-			super(GeometryType.TIN, args[0].hasZ, args[0].hasM);
-			this.addPolygon(args[0])
-		} else if (args.length === 1 && args[0] instanceof TIN) {
-			super(GeometryType.TIN, args[0].hasZ, args[0].hasM);
-			args[0].polygons.forEach(polygon => this.addPolygon(polygon.copy() as Polygon));
-		}  else if (args.length === 1 && args[0].length != null) {
-			super(GeometryType.TIN, args[0].hasZ, args[0].hasM);
-			this.polygons = args[0]
-		} else if (args.length === 2) {
-			super(GeometryType.TIN, args[0], args[1]);
-		} else if (args.length === 3) {
-			super(args[0], args[1], args[2]);
-		}
-	}
+  /**
+   * Create an empty TIN
+   * @returns TIN
+   */
+  public static create(
+    hasZ?: boolean,
+    hasM?: boolean,
+  ): TIN {
+    return new TIN(GeometryType.Tin, hasZ, hasM);
+  }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public copy(): Geometry {
-		return new TIN(this);
-	}
+  /**
+   * Create a TIN from a polygon
+   * @param polygon polygon
+   * @returns TIN
+   */
+  public static createFromPolygon(
+    polygon: Polygon,
+  ): TIN {
+    const tin = TIN.create(polygon.hasZ, polygon.hasM);
+    tin.addPolygon(polygon);
+    return tin;
+  }
+
+  /**
+   * Create a TIN from polygons
+   * @param polygons polygons
+   * @returns TIN
+   */
+  public static createFromPolygons(
+    polygons: Polygon[],
+  ): TIN {
+    const tin = TIN.create(polygons[0].hasZ, polygons[0].hasM);
+    tin.polygons = polygons;
+    return tin;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public copy(): TIN {
+    const tinCopy = TIN.create(this.hasZ, this.hasM);
+    for (const polygon of this.polygons) {
+      tinCopy.addPolygon(polygon.copy());
+    }
+    return tinCopy;
+  }
 }

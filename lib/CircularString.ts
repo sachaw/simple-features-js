@@ -1,39 +1,60 @@
-import { GeometryType, Geometry, Point, LineString } from "./internal";
+import type { Point } from "./mod.ts";
+import { Geometry, GeometryType, LineString } from "./mod.ts";
 
 /**
  * Circular String, Curve sub type
- *
- * @author osbornb
  */
 export class CircularString extends LineString {
+  /**
+   * Constructor
+   */
+  protected constructor(
+    geometryType: GeometryType,
+    hasZ?: boolean,
+    hasM?: boolean,
+  ) {
+    super(geometryType, hasZ, hasM);
+  }
 
-	public constructor();
-	public constructor(hasZ: boolean, hasM: boolean);
-	public constructor(geometry: Geometry);
+  /**
+   * Create an empty circular string
+   * @returns circular string
+   */
+  public static create(
+    hasZ?: boolean,
+    hasM?: boolean,
+  ): CircularString {
+    return new CircularString(GeometryType.CircularString, hasZ, hasM);
+  }
 
-	/**
-	 * Constructor
-	 */
-	public constructor(...args) {
-		if (args.length === 0) {
-			super(GeometryType.CIRCULARSTRING, false, false);
-		} else if (args.length === 2) {
-			super(GeometryType.CIRCULARSTRING, args[0], args[1]);
-		} else if (args.length === 1 && args[0] instanceof CircularString) {
-			super(GeometryType.CIRCULARSTRING, args[0].hasZ, args[1].hasM);
-			args[0].points.forEach(point => this.addPoint(point.copy() as Point));
-		} else if (args.length === 1 && args[0].length != null) {
-			super(GeometryType.CIRCULARSTRING, Geometry.hasZ(args[0]), Geometry.hasM(args[0]));
-			args[0].forEach(point => this.addPoint(point.copy()))
-		} else if (args.length === 3) {
-			super(args[0], args[1], args[2]);
-		}
-	}
+  /**
+   * Create a circular string
+   * @param hasZ has Z values
+   * @param hasM has M values
+   * @param points points
+   * @returns circular string
+   */
+  public static createFromPoints(points: Point[]): CircularString {
+    const hasZ = Geometry.hasZ(points);
+    const hasM = Geometry.hasM(points);
+    const circularString = CircularString.create(hasZ, hasM);
+    for (const point of points) {
+      circularString.addPoint(point);
+    }
+    return circularString;
+  }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public copy(): Geometry {
-		return new CircularString(this);
-	}
+  /**
+   * {@inheritDoc}
+   */
+  public copy(): CircularString {
+    const circularStringCopy = CircularString.create(
+      this.hasZ,
+      this.hasM,
+    );
+    for (const point of this.points) {
+      circularStringCopy.addPoint(point.copy());
+    }
+    return circularStringCopy;
+  }
 }

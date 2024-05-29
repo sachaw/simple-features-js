@@ -3,20 +3,18 @@
  * infinite or NaN values
  */
 export enum FiniteFilterType {
+  /**
+   * Accept only finite values
+   */
+  Finite = 0,
 
-	/**
-	 * Accept only finite values
-	 */
-	FINITE,
+  /**
+   * Accept finite and infinite values
+   */
+  FiniteAndInfinite = 1,
 
-	/**
-	 * Accept finite and infinite values
-	 */
-	FINITE_AND_INFINITE,
-
-	/**
-	 * Accept finite and Not a Number values
-	 */
-	FINITE_AND_NAN
-
+  /**
+   * Accept finite and Not a Number values
+   */
+  FiniteAndNan = 2,
 }

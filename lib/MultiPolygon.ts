@@ -1,92 +1,98 @@
-import { GeometryType, Geometry, Polygon, MultiSurface } from "./internal";
+import type { Curve, Polygon } from "./mod.ts";
+import { Geometry, GeometryType, MultiSurface } from "./mod.ts";
 
 /**
  * A restricted form of MultiSurface where each Surface in the collection must
  * be of type Polygon.
  */
 export class MultiPolygon extends MultiSurface<Polygon> {
+  /**
+   * Constructor
+   */
+  protected constructor(
+    geometryType: GeometryType,
+    hasZ?: boolean,
+    hasM?: boolean,
+  ) {
+    super(geometryType, hasZ, hasM);
+  }
 
-	public constructor();
-	public constructor(hasZ: boolean, hasM: boolean);
-	public constructor(multiPolygon: MultiPolygon);
-	public constructor(points: Array<Polygon>);
-	public constructor(type: GeometryType, hasZ: boolean, hasM: boolean);
+  public static create(
+    hasZ?: boolean,
+    hasM?: boolean,
+  ): MultiPolygon {
+    return new MultiPolygon(GeometryType.MultiPolygon, hasZ, hasM);
+  }
 
-	/**
-	 * Constructor
-	 */
-	public constructor(...args) {
-		if (args.length === 0) {
-			super(GeometryType.MULTIPOLYGON, false, false);
-		} else if (args.length === 2) {
-			super(GeometryType.MULTIPOLYGON, args[0], args[1]);
-		} else if (args.length === 3) {
-			super(args[0], args[1], args[2]);
-		} else if (args.length === 1 && args[0] instanceof Polygon) {
-			super(GeometryType.MULTIPOLYGON, args[0].hasZ, args[0].hasM);
-			this.addPolygon(args[0]);
-		} else if (args.length === 1 && args[0] instanceof MultiPolygon) {
-			super(GeometryType.MULTIPOLYGON, args[0].hasZ, args[0].hasM);
-			args[0].polygons.forEach(polygon => this.addPolygon(polygon));
-		} else if (args.length === 1 && args[0].length != null) {
-			super(GeometryType.MULTIPOLYGON, Geometry.hasZ(args[0]), Geometry.hasM(args[0]));
-			this.polygons = (args[0] as Array<Polygon>);
-		}
-	}
+  public static createFromPolygons(
+    polygons: Polygon[],
+  ): MultiPolygon {
+    const hasZ = Geometry.hasZ(polygons);
+    const hasM = Geometry.hasM(polygons);
+    const multiPolygon = MultiPolygon.create(hasZ, hasM);
+    multiPolygon.polygons = polygons;
+    return multiPolygon;
+  }
 
-	/**
-	 * Get the polygons
-	 * @return polygons
-	 */
-	public get polygons(): Array<Polygon> {
-		return this.getSurfaces();
-	}
+  /**
+   * Get the polygons
+   * @return polygons
+   */
+  public get polygons(): Polygon[] {
+    return this.getSurfaces();
+  }
 
-	/**
-	 * Set the polygons
-	 * @param polygons polygons
-	 */
-	public set polygons(polygons: Array<Polygon>) {
-		this.setSurfaces(polygons);
-	}
+  /**
+   * Set the polygons
+   * @param polygons polygons
+   */
+  public set polygons(polygons: Polygon[]) {
+    this.setSurfaces(polygons);
+  }
 
-	/**
-	 * Add a polygon
-	 * @param polygon polygon
-	 */
-	public addPolygon(polygon: Polygon): void {
-		this.addSurface(polygon);
-	}
+  /**
+   * Add a polygon
+   * @param polygon polygon
+   */
+  public addPolygon(polygon: Polygon): void {
+    this.addSurface(polygon);
+  }
 
-	/**
-	 * Add polygons
-	 * @param polygons polygons
-	 */
-	public addPolygons(polygons: Array<Polygon>): void {
-		this.addSurfaces(polygons);
-	}
+  /**
+   * Add polygons
+   * @param polygons polygons
+   */
+  public addPolygons(polygons: Polygon[]): void {
+    this.addSurfaces(polygons);
+  }
 
-	/**
-	 * Get the number of polygons
-	 * @return number of polygons
-	 */
-	public numPolygons(): number {
-		return this.numSurfaces();
-	}
+  /**
+   * Get the number of polygons
+   * @return number of polygons
+   */
+  public numPolygons(): number {
+    return this.numSurfaces();
+  }
 
-	/**
-	 * Returns the Nth polygon
-	 * @param n  nth polygon to return
-	 * @return polygon
-	 */
-	public getPolygon(n: number): Polygon {
-		return this.getSurface(n);
-	}
+  /**
+   * Returns the Nth polygon
+   * @param n  nth polygon to return
+   * @return polygon
+   */
+  public getPolygon(n: number): Polygon {
+    return this.getSurface(n);
+  }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public copy(): Geometry {
-		return new MultiPolygon(this);
-	}
+  /**
+   * {@inheritDoc}
+   */
+  public copy(): MultiPolygon {
+    const hasZ = this.hasZ;
+    const hasM = this.hasM;
+    const multiPolygonCopy = MultiPolygon.create(hasZ, hasM);
+    for (const polygon of this.polygons) {
+      multiPolygonCopy.addPolygon(polygon.copy());
+    }
+    return multiPolygonCopy;
+  }
 }
