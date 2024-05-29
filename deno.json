@@ -1,7 +1,7 @@
 {
   "name": "@dewars/simple-features",
   "version": "1.0.1",
-  "description": "OGC Simple Features JavaScript Library",
+  "description": "OGC Simple Features Library",
   "imports": {
     "@std/assert": "jsr:@std/assert@^0.225.3",
     "@std/expect": "jsr:@std/expect@^0.224.2",
